@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4 nov. 2015 13:38:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="domain.Activity" table="activity" schema="public">
+        <id name="activityId" type="short">
+            <column name="activity_id" />
+            <generator class="sequence"/>
+        </id>
+        <many-to-one name="zerenetyUser" class="domain.ZerenetyUser" fetch="select">
+            <column name="manager" not-null="true" />
+        </many-to-one>
+        <property name="activityName" type="string">
+            <column name="activity_name" length="25" not-null="true" />
+        </property>
+        <property name="activityShortDesc" type="string">
+            <column name="activity_short_desc" length="250" not-null="true" />
+        </property>
+        <property name="activityLongDesc" type="string">
+            <column name="activity_long_desc" length="500" />
+        </property>
+        <set name="events" table="event" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="activity_id" />
+            </key>
+            <one-to-many class="domain.Event" />
+        </set>
+    </class>
+</hibernate-mapping>

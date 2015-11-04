@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4 nov. 2015 13:38:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="domain.Excludeddate" table="excludeddate" schema="public">
+        <composite-id name="id" class="domain.ExcludeddateId">
+            <key-property name="excludedDate" type="date">
+                <column name="excluded_date" length="13" />
+            </key-property>
+            <key-property name="eventId" type="short">
+                <column name="event_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="event" class="domain.Event" update="false" insert="false" fetch="select">
+            <column name="event_id" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

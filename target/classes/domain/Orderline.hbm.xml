@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4 nov. 2015 13:38:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="domain.Orderline" table="orderline" schema="public">
+        <composite-id name="id" class="domain.OrderlineId">
+            <key-property name="productId" type="short">
+                <column name="product_id" />
+            </key-property>
+            <key-property name="orderId" type="short">
+                <column name="order_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="product" class="domain.Product" update="false" insert="false" fetch="select">
+            <column name="product_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="userorder" class="domain.Userorder" update="false" insert="false" fetch="select">
+            <column name="order_id" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="short">
+            <column name="quantity" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

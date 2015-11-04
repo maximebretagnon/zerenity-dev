@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4 nov. 2015 13:38:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="domain.Categoryproduct" table="categoryproduct" schema="public">
+        <id name="categoryId" type="short">
+            <column name="category_id" />
+            <generator class="sequence"/>
+        </id>
+        <many-to-one name="categoryproduct" class="domain.Categoryproduct" fetch="select">
+            <column name="category_parent_id" not-null="true" />
+        </many-to-one>
+        <property name="categoryLabel" type="string">
+            <column name="category_label" length="50" />
+        </property>
+        <set name="products" table="product" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="category_id" not-null="true" />
+            </key>
+            <one-to-many class="domain.Product" />
+        </set>
+        <set name="categoryproducts" table="categoryproduct" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="category_parent_id" not-null="true" />
+            </key>
+            <one-to-many class="domain.Categoryproduct" />
+        </set>
+    </class>
+</hibernate-mapping>
