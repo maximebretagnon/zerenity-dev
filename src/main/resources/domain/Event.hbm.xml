@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4 nov. 2015 13:38:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="domain.Event" table="event" schema="public">
+        <id name="eventId" type="short">
+            <column name="event_id" />
+            <generator class="sequence"/>
+        </id>
+        <many-to-one name="repetition" class="domain.Repetition" fetch="select">
+            <column name="repetition_id" />
+        </many-to-one>
+        <many-to-one name="zerenetyUser" class="domain.ZerenetyUser" fetch="select">
+            <column name="participant" not-null="true" />
+        </many-to-one>
+        <many-to-one name="room" class="domain.Room" fetch="select">
+            <column name="room_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="activity" class="domain.Activity" fetch="select">
+            <column name="activity_id" />
+        </many-to-one>
+        <property name="eventName" type="string">
+            <column name="event_name" length="50" />
+        </property>
+        <property name="eventStartDate" type="date">
+            <column name="event_start_date" length="13" not-null="true" />
+        </property>
+        <property name="eventEndDate" type="date">
+            <column name="event_end_date" length="13" not-null="true" />
+        </property>
+        <property name="eventPrice" type="java.lang.Double">
+            <column name="event_price" precision="17" scale="17" />
+        </property>
+        <set name="inscriptions" table="inscription" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="event_id" not-null="true" />
+            </key>
+            <one-to-many class="domain.Inscription" />
+        </set>
+        <set name="excludeddates" table="excludeddate" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="event_id" not-null="true" />
+            </key>
+            <one-to-many class="domain.Excludeddate" />
+        </set>
+    </class>
+</hibernate-mapping>
