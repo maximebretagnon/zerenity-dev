@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Hello from Zerenity</h2>
+<h2>Hello World from Zerenity</h2>
 </body>
 </html>
