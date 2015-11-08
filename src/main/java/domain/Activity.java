@@ -25,7 +25,7 @@ import javax.persistence.Table;
 public class Activity implements java.io.Serializable {
 
 	private short activityId;
-	private ZerenetyUser zerenetyUser;
+	private User User;
 	private String activityName;
 	private String activityShortDesc;
 	private String activityLongDesc;
@@ -34,19 +34,19 @@ public class Activity implements java.io.Serializable {
 	public Activity() {
 	}
 
-	public Activity(short activityId, ZerenetyUser zerenetyUser,
+	public Activity(short activityId, User User,
 			String activityName, String activityShortDesc) {
 		this.activityId = activityId;
-		this.zerenetyUser = zerenetyUser;
+		this.User = User;
 		this.activityName = activityName;
 		this.activityShortDesc = activityShortDesc;
 	}
 
-	public Activity(short activityId, ZerenetyUser zerenetyUser,
+	public Activity(short activityId, User User,
 			String activityName, String activityShortDesc,
 			String activityLongDesc, Set events) {
 		this.activityId = activityId;
-		this.zerenetyUser = zerenetyUser;
+		this.User = User;
 		this.activityName = activityName;
 		this.activityShortDesc = activityShortDesc;
 		this.activityLongDesc = activityLongDesc;
@@ -67,12 +67,12 @@ public class Activity implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "manager", nullable = false)
-	public ZerenetyUser getZerenetyUser() {
-		return this.zerenetyUser;
+	public User getUser() {
+		return this.User;
 	}
 
-	public void setZerenetyUser(ZerenetyUser zerenetyUser) {
-		this.zerenetyUser = zerenetyUser;
+	public void setUser(User User) {
+		this.User = User;
 	}
 
 	@Column(name = "activity_name", nullable = false, length = 25)

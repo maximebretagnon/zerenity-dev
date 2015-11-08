@@ -18,17 +18,17 @@ import javax.persistence.Table;
 public class Notification implements java.io.Serializable {
 
 	private short notificationId;
-	private ZerenetyUser zerenetyUser;
+	private User User;
 	private boolean isRead;
 	private boolean isCreationDemand;
 
 	public Notification() {
 	}
 
-	public Notification(short notificationId, ZerenetyUser zerenetyUser,
+	public Notification(short notificationId, User User,
 			boolean isRead, boolean isCreationDemand) {
 		this.notificationId = notificationId;
-		this.zerenetyUser = zerenetyUser;
+		this.User = User;
 		this.isRead = isRead;
 		this.isCreationDemand = isCreationDemand;
 	}
@@ -45,12 +45,12 @@ public class Notification implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "receiver", nullable = false)
-	public ZerenetyUser getZerenetyUser() {
-		return this.zerenetyUser;
+	public User getUser() {
+		return this.User;
 	}
 
-	public void setZerenetyUser(ZerenetyUser zerenetyUser) {
-		this.zerenetyUser = zerenetyUser;
+	public void setUser(User User) {
+		this.User = User;
 	}
 
 	@Column(name = "is_read", nullable = false)

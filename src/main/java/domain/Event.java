@@ -25,7 +25,7 @@ public class Event implements java.io.Serializable {
 
 	private short eventId;
 	private Repetition repetition;
-	private ZerenetyUser zerenetyUser;
+	private User User;
 	private Room room;
 	private Activity activity;
 	private String eventName;
@@ -38,22 +38,22 @@ public class Event implements java.io.Serializable {
 	public Event() {
 	}
 
-	public Event(short eventId, ZerenetyUser zerenetyUser, Room room,
+	public Event(short eventId, User User, Room room,
 			Date eventStartDate, Date eventEndDate) {
 		this.eventId = eventId;
-		this.zerenetyUser = zerenetyUser;
+		this.User = User;
 		this.room = room;
 		this.eventStartDate = eventStartDate;
 		this.eventEndDate = eventEndDate;
 	}
 
 	public Event(short eventId, Repetition repetition,
-			ZerenetyUser zerenetyUser, Room room, Activity activity,
+			User User, Room room, Activity activity,
 			String eventName, Date eventStartDate, Date eventEndDate,
 			Double eventPrice, Set inscriptions, Set excludeddates) {
 		this.eventId = eventId;
 		this.repetition = repetition;
-		this.zerenetyUser = zerenetyUser;
+		this.User = User;
 		this.room = room;
 		this.activity = activity;
 		this.eventName = eventName;
@@ -86,12 +86,12 @@ public class Event implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "participant", nullable = false)
-	public ZerenetyUser getZerenetyUser() {
-		return this.zerenetyUser;
+	public User getUser() {
+		return this.User;
 	}
 
-	public void setZerenetyUser(ZerenetyUser zerenetyUser) {
-		this.zerenetyUser = zerenetyUser;
+	public void setUser(User User) {
+		this.User = User;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

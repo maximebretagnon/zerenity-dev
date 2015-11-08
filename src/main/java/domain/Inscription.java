@@ -23,17 +23,17 @@ import javax.persistence.TemporalType;
 public class Inscription implements java.io.Serializable {
 
 	private InscriptionId id;
-	private ZerenetyUser zerenetyUser;
+	private User User;
 	private Event event;
 	private Date inscriptionDate;
 
 	public Inscription() {
 	}
 
-	public Inscription(InscriptionId id, ZerenetyUser zerenetyUser,
+	public Inscription(InscriptionId id, User User,
 			Event event, Date inscriptionDate) {
 		this.id = id;
-		this.zerenetyUser = zerenetyUser;
+		this.User = User;
 		this.event = event;
 		this.inscriptionDate = inscriptionDate;
 	}
@@ -52,12 +52,12 @@ public class Inscription implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", nullable = false, insertable = false, updatable = false)
-	public ZerenetyUser getZerenetyUser() {
-		return this.zerenetyUser;
+	public User getUser() {
+		return this.User;
 	}
 
-	public void setZerenetyUser(ZerenetyUser zerenetyUser) {
-		this.zerenetyUser = zerenetyUser;
+	public void setUser(User User) {
+		this.User = User;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

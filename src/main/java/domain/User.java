@@ -17,7 +17,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "zerenety_user", schema = "public", uniqueConstraints = @UniqueConstraint(columnNames = "user_mail"))
-public class ZerenetyUser implements java.io.Serializable {
+public class User implements java.io.Serializable {
 
 	private short userId;
 	private String userFirstname;
@@ -38,10 +38,10 @@ public class ZerenetyUser implements java.io.Serializable {
 	private Set inscriptions = new HashSet(0);
 	private Set activities = new HashSet(0);
 
-	public ZerenetyUser() {
+	public User() {
 	}
 
-	public ZerenetyUser(short userId, String userFirstname,
+	public User(short userId, String userFirstname,
 			String userLastname, String userAdresse, String userCity,
 			String userCp, String userMail, String userPwd, boolean isAdmin,
 			boolean isParticipant, boolean isMember, boolean isManager) {
@@ -59,7 +59,7 @@ public class ZerenetyUser implements java.io.Serializable {
 		this.isManager = isManager;
 	}
 
-	public ZerenetyUser(short userId, String userFirstname,
+	public User(short userId, String userFirstname,
 			String userLastname, String userAdresse, String userCity,
 			String userCp, String userMail, String userPwd, boolean isAdmin,
 			boolean isParticipant, boolean isMember, boolean isManager,

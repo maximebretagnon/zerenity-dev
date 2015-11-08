@@ -22,17 +22,17 @@ public class Cotisation implements java.io.Serializable {
 
 	private short cotisationId;
 	private Formule formule;
-	private ZerenetyUser zerenetyUser;
+	private User User;
 	private Date orderDate;
 
 	public Cotisation() {
 	}
 
 	public Cotisation(short cotisationId, Formule formule,
-			ZerenetyUser zerenetyUser, Date orderDate) {
+			User User, Date orderDate) {
 		this.cotisationId = cotisationId;
 		this.formule = formule;
-		this.zerenetyUser = zerenetyUser;
+		this.User = User;
 		this.orderDate = orderDate;
 	}
 
@@ -58,12 +58,12 @@ public class Cotisation implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", nullable = false)
-	public ZerenetyUser getZerenetyUser() {
-		return this.zerenetyUser;
+	public User getUser() {
+		return this.User;
 	}
 
-	public void setZerenetyUser(ZerenetyUser zerenetyUser) {
-		this.zerenetyUser = zerenetyUser;
+	public void setUser(User User) {
+		this.User = User;
 	}
 
 	@Temporal(TemporalType.DATE)

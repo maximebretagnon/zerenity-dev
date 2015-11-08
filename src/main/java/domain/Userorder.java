@@ -24,23 +24,23 @@ import javax.persistence.TemporalType;
 public class Userorder implements java.io.Serializable {
 
 	private short orderId;
-	private ZerenetyUser zerenetyUser;
+	private User User;
 	private Date orderDate;
 	private Set orderlines = new HashSet(0);
 
 	public Userorder() {
 	}
 
-	public Userorder(short orderId, ZerenetyUser zerenetyUser, Date orderDate) {
+	public Userorder(short orderId, User User, Date orderDate) {
 		this.orderId = orderId;
-		this.zerenetyUser = zerenetyUser;
+		this.User = User;
 		this.orderDate = orderDate;
 	}
 
-	public Userorder(short orderId, ZerenetyUser zerenetyUser, Date orderDate,
+	public Userorder(short orderId, User User, Date orderDate,
 			Set orderlines) {
 		this.orderId = orderId;
-		this.zerenetyUser = zerenetyUser;
+		this.User = User;
 		this.orderDate = orderDate;
 		this.orderlines = orderlines;
 	}
@@ -57,12 +57,12 @@ public class Userorder implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
-	public ZerenetyUser getZerenetyUser() {
-		return this.zerenetyUser;
+	public User getUser() {
+		return this.User;
 	}
 
-	public void setZerenetyUser(ZerenetyUser zerenetyUser) {
-		this.zerenetyUser = zerenetyUser;
+	public void setUser(User User) {
+		this.User = User;
 	}
 
 	@Temporal(TemporalType.DATE)
