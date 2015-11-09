@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 4 nov. 2015 13:38:11 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="domain.ZerenetyUser" table="zerenety_user" schema="public">
+    <class name="domain.User" table="user" schema="public">
         <id name="userId" type="short">
             <column name="user_id" />
             <generator class="sequence"/>

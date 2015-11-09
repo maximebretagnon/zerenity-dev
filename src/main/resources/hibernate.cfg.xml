@@ -5,9 +5,9 @@
 <hibernate-configuration>
     <session-factory>
 	    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.password">vipbicpauU6o369AgQfSyv0ulY</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://ec2-54-247-170-228.eu-west-1.compute.amazonaws.com:5432/d2pn5p5rsnoeqd?sslmode=require</property>
-		<property name="hibernate.connection.username">cmhrjjikoxioec</property>
+		<property name="hibernate.connection.password">QoQUjTOHroPjLBaH1e-3BcRES3</property>
+		<property name="hibernate.connection.url">jdbc:postgres://ec2-54-217-208-102.eu-west-1.compute.amazonaws.com:5432/d5gd0tbcs00vqb?sslmode=require</property>
+		<property name="hibernate.connection.username">xwvkfvtmzcffzz</property>
 		<property name="hibernate.default_schema">public</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 		<property name="show_sql">true</property>
@@ -23,7 +23,7 @@
 		<mapping resource="domain/Product.hbm.xml" />
 		<mapping resource="domain/Repetition.hbm.xml" />
 		<mapping resource="domain/Userorder.hbm.xml" />
-		<mapping resource="domain/ZerenetyUser.hbm.xml" />
+		<mapping resource="domain/User.hbm.xml" />
 		<mapping resource="domain/Formule.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
