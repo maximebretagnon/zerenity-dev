@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 4 nov. 2015 13:38:11 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 9 nov. 2015 15:50:29 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="domain.Repetition" table="repetition" schema="public">
         <id name="repetitionId" type="short">
             <column name="repetition_id" />
-            <generator class="sequence"/>
+            <generator class="sequence">
+            	<param name="sequence">repetition_id_seq</param>
+            </generator>
         </id>
         <property name="repetitionLabel" type="string">
             <column name="repetition_label" length="50" />
         </property>
-        <set name="events" table="event" inverse="true" lazy="true" fetch="select">
+        <set name="events" table="event" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="repetition_id" />
             </key>

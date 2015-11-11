@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 4 nov. 2015 13:38:11 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 9 nov. 2015 15:50:29 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="domain.Activity" table="activity" schema="public">
         <id name="activityId" type="short">
             <column name="activity_id" />
-            <generator class="sequence"/>
+            <generator class="sequence">
+            	<param name="sequence">activity_id_seq</param>
+            </generator>
         </id>
-        <many-to-one name="zerenetyUser" class="domain.ZerenetyUser" fetch="select">
+        <many-to-one name="user" class="domain.User" fetch="select">
             <column name="manager" not-null="true" />
         </many-to-one>
         <property name="activityName" type="string">
@@ -20,7 +22,7 @@
         <property name="activityLongDesc" type="string">
             <column name="activity_long_desc" length="500" />
         </property>
-        <set name="events" table="event" inverse="true" lazy="true" fetch="select">
+        <set name="events" table="event" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="activity_id" />
             </key>

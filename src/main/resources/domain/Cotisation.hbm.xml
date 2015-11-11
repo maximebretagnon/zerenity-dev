@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 4 nov. 2015 13:38:11 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 9 nov. 2015 15:50:29 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="domain.Cotisation" table="cotisation" schema="public">
         <id name="cotisationId" type="short">
             <column name="cotisation_id" />
-            <generator class="sequence"/>
+            <generator class="sequence">
+            	<param name="sequence">cotisation_id_seq</param>
+            </generator>
         </id>
         <many-to-one name="formule" class="domain.Formule" fetch="select">
             <column name="formule_id" not-null="true" />
         </many-to-one>
-        <many-to-one name="zerenetyUser" class="domain.ZerenetyUser" fetch="select">
+        <many-to-one name="user" class="domain.User" fetch="select">
             <column name="member_id" not-null="true" />
         </many-to-one>
         <property name="orderDate" type="date">
