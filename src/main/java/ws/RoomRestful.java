@@ -6,12 +6,11 @@ import java.util.*;
 import javax.ws.rs.core.*;
 import javax.ws.rs.*;
 
-@Path("room")
+@Path("rooms")
 public class RoomRestful {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/findAll")
 	public Response findAll(){
 		RoomModel rm = new RoomModel();
 		return Response.ok().entity(new GenericEntity<List<Room>>(rm.findAll()){})
@@ -22,7 +21,7 @@ public class RoomRestful {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/find/{room_id}")
+	@Path("/{room_id}")
 	public Response getRoomById(@PathParam("room_id") Short room_id) {
 		RoomModel rm = new RoomModel();
 		Room r = rm.get(room_id);
@@ -37,7 +36,6 @@ public class RoomRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/create")
 	public Response createRoom(Room r) {
 		RoomModel rm = new RoomModel();
 		rm.save(r);
@@ -50,7 +48,7 @@ public class RoomRestful {
 
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/delete/{room_id}")
+	@Path("/{room_id}")
 	public Response deleteRoom(@PathParam("room_id") Short room_id) {
 		RoomModel rm = new RoomModel();
 		rm.delete(rm.get(room_id));
@@ -63,7 +61,6 @@ public class RoomRestful {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/edit")
 	public Response editRoom(Room r){
 		RoomModel rm = new RoomModel();
 		rm.update(r);
