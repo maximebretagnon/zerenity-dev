@@ -1,6 +1,6 @@
 package ws;
 
-import java.util.List;
+import java.util.*;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.UserModel;
-import domain.User;
+import domain.*;
 
 @Path("users")
 public class UserRestful {
@@ -39,6 +39,31 @@ public class UserRestful {
 		if(u == null)
 			return null;
 		return Response.ok().entity(new GenericEntity<User>(u){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
+				.build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{User_id}/notifications")
+	public Response getNotificationsUser(@PathParam("User_id") Short User_id) {
+		UserModel um = new UserModel();
+		return Response.ok().entity(new GenericEntity<Set<Notification>>(um.getNotification(User_id)){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
+				.build();
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{User_id}/notifications")
+	public Response createNotificationUser(@PathParam("User_id") Short User_id, Notification n) {
+		UserModel um = new UserModel();
+		um.createNotification(User_id, n);
+		
+		return Response.ok()
 				.header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
 				.build();
