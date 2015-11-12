@@ -1,5 +1,8 @@
 package demohibernate;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import domain.Room;
 import persistence.HibernateUtil;
 
