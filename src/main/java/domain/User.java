@@ -33,6 +33,7 @@ public class User implements java.io.Serializable {
 	private String userCp;
 	private String userMail;
 	private String userPwd;
+	private String userToken;
 	private boolean isAdmin;
 	private boolean isParticipant;
 	private boolean isMember;
@@ -166,7 +167,16 @@ public class User implements java.io.Serializable {
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
+	
+	@Column(name = "user_token", nullable = true, length = 128)
+	public String getUserToken() {
+		return this.userToken;
+	}
 
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
+	}
+	
 	@Column(name = "is_admin", nullable = false)
 	public boolean isIsAdmin() {
 		return this.isAdmin;

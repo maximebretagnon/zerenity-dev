@@ -31,6 +31,9 @@
         <property name="userPwd" type="string">
             <column name="user_pwd" not-null="true" />
         </property>
+        <property name="userToken" type="string">
+            <column name="user_token" not-null="false" />
+        </property>
         <property name="isAdmin" type="boolean">
             <column name="is_admin" not-null="true" />
         </property>

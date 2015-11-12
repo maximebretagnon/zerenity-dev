@@ -15,6 +15,7 @@ public class ApplicationConfig extends Application{
 	
 	private void addRestResourceClasses(Set <Class<?>> resources){
 		resources.add(ws.RoomRestful.class);
-		resources.add(ws.UserRestful.class);
+		resources.add(ws.UserRestful.class);	
+		resources.add(auth.AuthService.class);
 	}
 }
