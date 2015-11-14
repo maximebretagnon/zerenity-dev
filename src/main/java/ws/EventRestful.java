@@ -21,6 +21,7 @@ import model.RepetitionModel;
 import domain.Event;
 import domain.Excludeddate;
 import domain.Inscription;
+import domain.InscriptionId;
 import domain.Repetition;
 
 @Path("events")
@@ -66,7 +67,7 @@ public class EventRestful {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editUser(Event e){
+	public Response editEvent(Event e){
 		EventModel em = new EventModel();
 		em.update(e);
 		
@@ -79,7 +80,7 @@ public class EventRestful {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{event_id}")
-	public Response deleteUser(@PathParam("event_id") Short event_id) {
+	public Response deleteEvent(@PathParam("event_id") Short event_id) {
 		EventModel em = new EventModel();
 		em.delete(em.get(event_id));
 		return Response.ok()
@@ -91,7 +92,7 @@ public class EventRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/repetition")
-	public Response getFormules() {
+	public Response getRepetition() {
 		RepetitionModel rm = new RepetitionModel();
 		return Response.ok().entity(new GenericEntity<List<Repetition>>(rm.findAll()){})
 				.header("Access-Control-Allow-Origin", "*")
@@ -109,7 +110,7 @@ public class EventRestful {
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
 				.build();
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -148,11 +149,11 @@ public class EventRestful {
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
 				.build();
 	}
-	
+
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{event_id}/register/{register_id")
-	public Response deleteNotificationUser(@PathParam("event_id") Short event_id, @PathParam("register_id") Short register_id ) {
+	@Path("/{event_id}/register/{register_id}")
+	public Response deleteRegistration(@PathParam("event_id") Short event_id, @PathParam("register_id") Short register_id ) {
 		InscriptionModel im = new InscriptionModel();
 		im.delete(im.get(register_id));
 		return Response.ok()

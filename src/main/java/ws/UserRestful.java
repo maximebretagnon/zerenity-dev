@@ -107,7 +107,7 @@ public class UserRestful {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{User_id}/subscriptions/{subscription_id")
+	@Path("/{User_id}/subscriptions/{subscription_id}")
 	public Response getCotisationUserById(@PathParam("User_id") Short User_id, @PathParam("subscription_id") Short subscription_id ) {
 		CotisationModel cm = new CotisationModel();
 		return Response.ok().entity(new GenericEntity<Cotisation>(cm.get(subscription_id)){})
@@ -129,7 +129,7 @@ public class UserRestful {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{User_id}/notifications/{notifcation_id")
+	@Path("/{User_id}/notifications/{notification_id}")
 	public Response getNotificationsUserById(@PathParam("User_id") Short User_id, @PathParam("notification_id") Short notification_id ) {
 		NotificationModel nm = new NotificationModel();
 		return Response.ok().entity(new GenericEntity<Notification>(nm.get(notification_id)){})
@@ -140,7 +140,7 @@ public class UserRestful {
 	
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{User_id}/notifications/{notifcation_id")
+	@Path("/{User_id}/notifications/{notification_id}")
 	public Response deleteNotificationUser(@PathParam("User_id") Short User_id, @PathParam("notification_id") Short notification_id ) {
 		NotificationModel nm = new NotificationModel();
 		nm.delete(nm.get(notification_id));
@@ -153,7 +153,7 @@ public class UserRestful {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{User_id}/notifications/{notification_id/read")
+	@Path("/{User_id}/notifications/{notification_id}/read")
 	public Response editNotification(Notification n){
 		NotificationModel nm = new NotificationModel();
 		nm.update(n);

@@ -83,11 +83,11 @@ public class Notification implements java.io.Serializable {
 	}
 
 	@Column(name = "message", nullable = false, length = 255)
-	public String getUserMessage() {
+	public String getMessage() {
 		return this.message;
 	}
 
-	public void setUserMessage(String message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
 }
