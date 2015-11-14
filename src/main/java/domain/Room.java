@@ -77,11 +77,11 @@ public class Room implements java.io.Serializable {
 	}
 
 	@Column(name = "capacity")
-	public Short getCapacity() {
+	public short getCapacity() {
 		return this.capacity;
 	}
 
-	public void setCapacity(Short capacity) {
+	public void setCapacity(short capacity) {
 		this.capacity = capacity;
 	}
 
