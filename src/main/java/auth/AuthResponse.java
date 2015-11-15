@@ -2,6 +2,7 @@ package auth;
 
 public class AuthResponse{
 	
+	private int id;
     private String username;
     private String token;
     private boolean isAdmin;
@@ -9,10 +10,11 @@ public class AuthResponse{
     private boolean isMember;
     private boolean isManager;
     
-    public AuthResponse(String username, String token, 
+    public AuthResponse(int id, String username, String token, 
     		boolean isAdmin, boolean isParticipant, 
     		boolean isMember, boolean isManager){
     	
+    	this.id = id;
     	this.username = username;
     	this.token = token;
     	this.isAdmin = isAdmin;
@@ -20,6 +22,14 @@ public class AuthResponse{
     	this.isMember = isMember;
     	this.isManager = isManager;
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;

@@ -52,7 +52,7 @@ public class AuthService{
 	            System.out.println("ERROR: " + e.getMessage());
 	        }
             user.setUserToken(out);
-            AuthResponse res = new AuthResponse(user.getUserMail(), out, user.isIsAdmin(), user.isIsParticipant(), user.isIsMember(), user.isIsManager());
+            AuthResponse res = new AuthResponse(user.getUserId(), user.getUserMail(), out, user.isIsAdmin(), user.isIsParticipant(), user.isIsMember(), user.isIsManager());
             um.update(user);
 			return Response.status(200).entity(res)
 					.header("Access-Control-Allow-Origin", "*")
