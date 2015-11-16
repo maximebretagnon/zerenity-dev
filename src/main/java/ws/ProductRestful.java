@@ -81,4 +81,15 @@ public class ProductRestful {
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
 				.build();
 	}
+	
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Path("/categories")
+//	public Response findAllCategories() {
+//		ProductCategoryModel pcm = new ProductCategoryModel();
+//		return Response.ok().entity(new GenericEntity<List<Product>>(pcm.findAll()){})
+//				.header("Access-Control-Allow-Origin", "*")
+//				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
+//				.build();
+//	}
 }

@@ -20,5 +20,6 @@ public class ApplicationConfig extends Application{
 		resources.add(ws.OrderRestful.class);
 		resources.add(ws.ActivityRestful.class);
 		resources.add(auth.AuthService.class);
+		resources.add(ws.ProductRestful.class);
 	}
 }

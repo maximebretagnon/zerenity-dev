@@ -16,7 +16,7 @@
   <mapping resource="domain/Userorder.hbm.xml"/>
   <mapping resource="domain/Notification.hbm.xml"/>
   <mapping resource="domain/Cotisation.hbm.xml"/>
-  <mapping resource="domain/Categoryproduct.hbm.xml"/>
+  <mapping resource="domain/ProductCategory.hbm.xml"/>
   <mapping resource="domain/Excludeddate.hbm.xml"/>
   <mapping resource="domain/Formule.hbm.xml"/>
   <mapping resource="domain/Repetition.hbm.xml"/>
