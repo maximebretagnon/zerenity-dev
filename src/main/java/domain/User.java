@@ -28,7 +28,7 @@ public class User implements java.io.Serializable {
 	private short userId;
 	private String userFirstname;
 	private String userLastname;
-	private String userAdresse;
+	private String userAddress;
 	private String userCity;
 	private String userCp;
 	private String userMail;
@@ -49,13 +49,13 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(short userId, String userFirstname, String userLastname,
-			String userAdresse, String userCity, String userCp,
+			String userAddress, String userCity, String userCp,
 			String userMail, String userPwd, boolean isAdmin,
 			boolean isParticipant, boolean isMember, boolean isManager) {
 		this.userId = userId;
 		this.userFirstname = userFirstname;
 		this.userLastname = userLastname;
-		this.userAdresse = userAdresse;
+		this.userAddress = userAddress;
 		this.userCity = userCity;
 		this.userCp = userCp;
 		this.userMail = userMail;
@@ -67,7 +67,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(short userId, String userFirstname, String userLastname,
-			String userAdresse, String userCity, String userCp,
+			String userAddress, String userCity, String userCp,
 			String userMail, String userPwd, boolean isAdmin,
 			boolean isParticipant, boolean isMember, boolean isManager,
 			Set<Notification> notifications, Set<Userorder> userorders,
@@ -76,7 +76,7 @@ public class User implements java.io.Serializable {
 		this.userId = userId;
 		this.userFirstname = userFirstname;
 		this.userLastname = userLastname;
-		this.userAdresse = userAdresse;
+		this.userAddress = userAddress;
 		this.userCity = userCity;
 		this.userCp = userCp;
 		this.userMail = userMail;
@@ -124,12 +124,12 @@ public class User implements java.io.Serializable {
 	}
 
 	@Column(name = "user_adresse", nullable = false, length = 50)
-	public String getUserAdresse() {
-		return this.userAdresse;
+	public String getUserAddress() {
+		return this.userAddress;
 	}
 
-	public void setUserAdresse(String userAdresse) {
-		this.userAdresse = userAdresse;
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
 	}
 
 	@Column(name = "user_city", nullable = false, length = 25)

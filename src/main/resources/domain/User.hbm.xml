@@ -16,7 +16,7 @@
         <property name="userLastname" type="string">
             <column name="user_lastname" length="25" not-null="true" />
         </property>
-        <property name="userAdresse" type="string">
+        <property name="userAddress" type="string">
             <column name="user_adresse" length="50" />
         </property>
         <property name="userCity" type="string">
