@@ -13,6 +13,9 @@
         <property name="formuleLabel" type="string">
             <column name="formule_label" length="50" />
         </property>
+        <property name="formulePrice" type="double">
+            <column name="formule_price" precision="17" scale="17" not-null="true" />
+        </property>
         <set name="cotisations" table="cotisation" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="formule_id" not-null="true" />
