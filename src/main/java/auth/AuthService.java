@@ -30,7 +30,7 @@ public class AuthService{
 		UserModel um = new UserModel();
 		User user = um.getByMail(cred.getUsername());
 		String out = "";
-		if (user != null && user.getUserPwd().equals(cred.getPassword())){
+		if (user != null && user.getUserPwd().equals(Utils.toSHA512(cred.getPassword()))){
 			String token = UUID.randomUUID().toString() + "wKcGt" + user.getUserPwd();
 	        String hashed = Utils.toSHA512(token);
             user.setUserToken(hashed);
