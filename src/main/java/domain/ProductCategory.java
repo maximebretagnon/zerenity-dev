@@ -98,7 +98,7 @@ public class ProductCategory implements java.io.Serializable {
 		return this.productCategories;
 	}
 
-	public void setProductCategorys(Set<ProductCategory> productCategories) {
+	public void setProductCategories(Set<ProductCategory> productCategories) {
 		this.productCategories = productCategories;
 	}
 
