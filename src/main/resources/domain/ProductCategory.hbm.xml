@@ -3,14 +3,14 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 9 nov. 2015 15:50:29 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="domain.Categoryproduct" table="categoryproduct" schema="public">
+    <class name="domain.ProductCategory" table="categoryproduct" schema="public">
         <id name="categoryId" type="short">
             <column name="category_id" />
             <generator class="sequence">
             	<param name="sequence">category_product_id_seq</param>
             </generator>
         </id>
-        <many-to-one name="categoryproduct" class="domain.Categoryproduct" fetch="select">
+        <many-to-one name="productCategory" class="domain.ProductCategory" fetch="select">
             <column name="category_parent_id" not-null="true" />
         </many-to-one>
         <property name="categoryLabel" type="string">
@@ -22,11 +22,11 @@
             </key>
             <one-to-many class="domain.Product" />
         </set>
-        <set name="categoryproducts" table="categoryproduct" inverse="true" lazy="false" fetch="select">
+        <set name="productCategories" table="categoryproduct" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="category_parent_id" not-null="true" />
             </key>
-            <one-to-many class="domain.Categoryproduct" />
+            <one-to-many class="domain.ProductCategory" />
         </set>
     </class>
 </hibernate-mapping>
