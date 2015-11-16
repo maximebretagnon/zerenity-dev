@@ -10,11 +10,14 @@
             	<param name="sequence">product_id_seq</param>
             </generator>
         </id>
-        <many-to-one name="categoryproduct" class="domain.Categoryproduct" fetch="select">
+        <many-to-one name="productCategory" class="domain.ProductCategory" fetch="select">
             <column name="category_id" not-null="true" />
         </many-to-one>
         <property name="productPrice" type="double">
             <column name="product_price" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="productName" type="string">
+            <column name="product_name" length="50" not-null="true" />
         </property>
         <property name="stockQuantity" type="int">
             <column name="stock_quantity" not-null="true" />

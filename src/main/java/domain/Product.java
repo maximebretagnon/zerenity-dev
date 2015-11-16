@@ -30,6 +30,7 @@ public class Product implements java.io.Serializable {
 	private short productId;
 	private ProductCategory productCategory;
 	private double productPrice;
+	private String productName;
 	private int stockQuantity;
 	private Set<Orderline> orderlines = new HashSet<Orderline>(0);
 
@@ -41,6 +42,7 @@ public class Product implements java.io.Serializable {
 		this.productId = productId;
 		this.productCategory = productCategory;
 		this.productPrice = productPrice;
+		this.productName = productName;
 		this.stockQuantity = stockQuantity;
 	}
 
@@ -83,6 +85,15 @@ public class Product implements java.io.Serializable {
 
 	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
+	}
+
+	@Column(name = "product_name", nullable = false, length = 50)
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	@Column(name = "stock_quantity", nullable = false)
