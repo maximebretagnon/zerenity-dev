@@ -24,6 +24,7 @@ public class ProductRestful {
 	public Response findAll(){
 		ProductModel pm = new ProductModel();
 		return Response.ok().entity(new GenericEntity<List<Product>>(pm.findAll()){})
+				.header("Access-Control-Allow-Headers", "Content-Type")
 				.header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
 				.build();
