@@ -18,6 +18,7 @@ import model.CotisationModel;
 import model.FormuleModel;
 import model.NotificationModel;
 import model.UserModel;
+import utils.Utils;
 import domain.*;
 
 @Path("users")
@@ -183,6 +184,9 @@ public class UserRestful {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createUser(User u) {
 		UserModel um = new UserModel();
+		String password = u.getUserPwd();
+		String hashed = Utils.toSHA512(password);
+		u.setUserPwd(hashed);
 		um.save(u);
 		
 		return Response.ok()
