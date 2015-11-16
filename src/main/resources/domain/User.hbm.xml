@@ -46,37 +46,37 @@
         <property name="userToken" type="string">
             <column name="user_token" length="128" />
         </property>
-        <set name="notifications" table="notification" inverse="true" lazy="true" fetch="select">
+        <set name="notifications" table="notification" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="receiver" not-null="true" />
             </key>
             <one-to-many class="domain.Notification" />
         </set>
-        <set name="userorders" table="userorder" inverse="true" lazy="true" fetch="select">
+        <set name="userorders" table="userorder" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="user_id" not-null="true" />
             </key>
             <one-to-many class="domain.Userorder" />
         </set>
-        <set name="events" table="event" inverse="true" lazy="true" fetch="select">
+        <set name="events" table="event" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="participant" not-null="true" />
             </key>
             <one-to-many class="domain.Event" />
         </set>
-        <set name="cotisations" table="cotisation" inverse="true" lazy="true" fetch="select">
+        <set name="cotisations" table="cotisation" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="member_id" not-null="true" />
             </key>
             <one-to-many class="domain.Cotisation" />
         </set>
-        <set name="inscriptions" table="inscription" inverse="true" lazy="true" fetch="select">
+        <set name="inscriptions" table="inscription" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="member_id" not-null="true" />
             </key>
             <one-to-many class="domain.Inscription" />
         </set>
-        <set name="activities" table="activity" inverse="true" lazy="true" fetch="select">
+        <set name="activities" table="activity" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="manager" not-null="true" />
             </key>
