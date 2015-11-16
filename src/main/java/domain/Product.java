@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Product implements java.io.Serializable {
 
 	private short productId;
-	private Categoryproduct categoryproduct;
+	private ProductCategory productCategory;
 	private double productPrice;
 	private int stockQuantity;
 	private Set<Orderline> orderlines = new HashSet<Orderline>(0);
@@ -36,18 +36,18 @@ public class Product implements java.io.Serializable {
 	public Product() {
 	}
 
-	public Product(short productId, Categoryproduct categoryproduct,
+	public Product(short productId, ProductCategory productCategory,
 			double productPrice, int stockQuantity) {
 		this.productId = productId;
-		this.categoryproduct = categoryproduct;
+		this.productCategory = productCategory;
 		this.productPrice = productPrice;
 		this.stockQuantity = stockQuantity;
 	}
 
-	public Product(short productId, Categoryproduct categoryproduct,
+	public Product(short productId, ProductCategory productCategory,
 			double productPrice, int stockQuantity, Set<Orderline> orderlines) {
 		this.productId = productId;
-		this.categoryproduct = categoryproduct;
+		this.productCategory = productCategory;
 		this.productPrice = productPrice;
 		this.stockQuantity = stockQuantity;
 		this.orderlines = orderlines;
@@ -68,12 +68,12 @@ public class Product implements java.io.Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id", nullable = false)
 	@XmlTransient
-	public Categoryproduct getCategoryproduct() {
-		return this.categoryproduct;
+	public ProductCategory getProductCategory() {
+		return this.productCategory;
 	}
 
-	public void setCategoryproduct(Categoryproduct categoryproduct) {
-		this.categoryproduct = categoryproduct;
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
 	}
 
 	@Column(name = "product_price", nullable = false, precision = 17, scale = 17)

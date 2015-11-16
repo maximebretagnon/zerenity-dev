@@ -206,6 +206,7 @@ public class UserRestful {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{User_id}")
 	public Response editUser(User u){
 		UserModel um = new UserModel();
 		um.update(u);

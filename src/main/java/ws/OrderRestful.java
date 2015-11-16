@@ -44,7 +44,7 @@ public class OrderRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{order_id}")
-	public Response getUserById(@PathParam("order_id") Short order_id) {
+	public Response getOrderById(@PathParam("order_id") Short order_id) {
 		OrderModel om = new OrderModel();
 		Userorder o = om.get(order_id);
 		if(o == null)
