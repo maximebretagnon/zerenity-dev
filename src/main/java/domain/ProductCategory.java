@@ -28,28 +28,28 @@ import javax.xml.bind.annotation.XmlTransient;
 public class ProductCategory implements java.io.Serializable {
 
 	private short categoryId;
-	private ProductCategory ProductCategory;
+	private ProductCategory productCategory;
 	private String categoryLabel;
 	private Set<Product> products = new HashSet<Product>(0);
-	private Set<ProductCategory> ProductCategorys = new HashSet<ProductCategory>(
+	private Set<ProductCategory> productCategories = new HashSet<ProductCategory>(
 			0);
 
 	public ProductCategory() {
 	}
 
-	public ProductCategory(short categoryId, ProductCategory ProductCategory) {
+	public ProductCategory(short categoryId, ProductCategory productCategory) {
 		this.categoryId = categoryId;
-		this.ProductCategory = ProductCategory;
+		this.productCategory = productCategory;
 	}
 
-	public ProductCategory(short categoryId, ProductCategory ProductCategory,
+	public ProductCategory(short categoryId, ProductCategory productCategory,
 			String categoryLabel, Set<Product> products,
-			Set<ProductCategory> ProductCategorys) {
+			Set<ProductCategory> productCategories) {
 		this.categoryId = categoryId;
-		this.ProductCategory = ProductCategory;
+		this.productCategory = productCategory;
 		this.categoryLabel = categoryLabel;
 		this.products = products;
-		this.ProductCategorys = ProductCategorys;
+		this.productCategories = productCategories;
 	}
 
 	@Id
@@ -68,11 +68,11 @@ public class ProductCategory implements java.io.Serializable {
 	@JoinColumn(name = "category_parent_id", nullable = false)
 	@XmlTransient
 	public ProductCategory getProductCategory() {
-		return this.ProductCategory;
+		return this.productCategory;
 	}
 
-	public void setProductCategory(ProductCategory ProductCategory) {
-		this.ProductCategory = ProductCategory;
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
 	}
 
 	@Column(name = "category_label", length = 50)
@@ -94,12 +94,12 @@ public class ProductCategory implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ProductCategory")
-	public Set<ProductCategory> getProductCategorys() {
-		return this.ProductCategorys;
+	public Set<ProductCategory> getProductCategories() {
+		return this.productCategories;
 	}
 
-	public void setProductCategorys(Set<ProductCategory> ProductCategorys) {
-		this.ProductCategorys = ProductCategorys;
+	public void setProductCategorys(Set<ProductCategory> productCategories) {
+		this.productCategories = productCategories;
 	}
 
 }
