@@ -82,14 +82,28 @@ public class ProductRestful {
 				.build();
 	}
 	
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Path("/categories")
-//	public Response findAllCategories() {
-//		ProductCategoryModel pcm = new ProductCategoryModel();
-//		return Response.ok().entity(new GenericEntity<List<Product>>(pcm.findAll()){})
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
-//				.build();
-//	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/categories")
+	public Response findAllCategories() {
+		ProductCategoryModel pcm = new ProductCategoryModel();
+		return Response.ok().entity(new GenericEntity<List<ProductCategory>>(pcm.findAll()){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
+				.build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/categories/{category_id}")
+	public Response getCategoryById(@PathParam("category_id") Short category_id) {
+		ProductCategoryModel pcm = new ProductCategoryModel();
+		ProductCategory pc = pcm.get(category_id);
+		if(pc == null)
+			return null;
+		return Response.ok().entity(new GenericEntity<ProductCategory>(pc){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
+				.build();
+	}
 }
