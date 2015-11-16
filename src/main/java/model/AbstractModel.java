@@ -2,12 +2,14 @@ package model;
 
 import persistence.HibernateUtil;
 
+import java.io.Serializable;
 import java.util.*;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class AbstractModel<T, PK extends Short> {
+public class AbstractModel<T, PK> {
 
     private Class<T> cl;
 
@@ -51,7 +53,7 @@ public class AbstractModel<T, PK extends Short> {
     	Session session = HibernateUtil.currentSession();
         Transaction tx = session.beginTransaction();
         
-        T element = (T) session.get(cl, id);
+        T element = (T) session.get(cl, (Serializable) id);
 
         tx.commit();
         HibernateUtil.closeSession();

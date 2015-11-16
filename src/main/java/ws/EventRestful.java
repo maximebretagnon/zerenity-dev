@@ -152,10 +152,19 @@ public class EventRestful {
 
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{event_id}/register/{register_id}")
-	public Response deleteRegistration(@PathParam("event_id") Short event_id, @PathParam("register_id") Short register_id ) {
+	@Path("/{event_id}/register")
+	/**
+	 * 
+	 Format JSON de InscriptionId 
+		 {
+		  	"eventId": "event_id",
+		    "memberId": "member_id"
+		 }
+	 * 
+	 */
+	public Response deleteRegistration(@PathParam("event_id") Short event_id, InscriptionId id ) {
 		InscriptionModel im = new InscriptionModel();
-		im.delete(im.get(register_id));
+		im.delete(im.get(id));
 		return Response.ok()
 				.header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
