@@ -11,7 +11,7 @@
             </generator>
         </id>
         <many-to-one name="productCategory" class="domain.ProductCategory" fetch="select">
-            <column name="category_parent_id" not-null="true" />
+            <column name="category_parent_id" not-null="false" />
         </many-to-one>
         <property name="categoryLabel" type="string">
             <column name="category_label" length="50" />
@@ -24,7 +24,7 @@
         </set>
         <set name="productCategories" table="categoryproduct" inverse="true" lazy="false" fetch="select">
             <key>
-                <column name="category_parent_id" not-null="true" />
+                <column name="category_parent_id" not-null="false" />
             </key>
             <one-to-many class="domain.ProductCategory" />
         </set>
