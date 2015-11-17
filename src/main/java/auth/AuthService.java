@@ -29,12 +29,11 @@ public class AuthService{
 	public Response login(Credentials cred) {
 		UserModel um = new UserModel();
 		User user = um.getByMail(cred.getUsername());
-		String out = "";
 		if (user != null && user.getUserPwd().equals(Utils.toSHA512(cred.getPassword()))){
 			String token = UUID.randomUUID().toString() + "wKcGt" + user.getUserPwd();
 	        String hashed = Utils.toSHA512(token);
             user.setUserToken(hashed);
-            AuthResponse res = new AuthResponse(user.getUserId(), user.getUserMail(), out, user.isIsAdmin(), user.isIsParticipant(), user.isIsMember(), user.isIsManager());
+            AuthResponse res = new AuthResponse(user.getUserId(), user.getUserMail(), token, user.isIsAdmin(), user.isIsParticipant(), user.isIsMember(), user.isIsManager());
             um.update(user);
 			return Response.status(200).entity(res)
 					.header("Access-Control-Allow-Origin", "*")
