@@ -21,7 +21,7 @@ public class ActivityRestful {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findAll(){
+	public Response findAll() throws IllegalArgumentException, Exception{
 		ActivityModel am = new ActivityModel();
 		return Response.ok().entity(new GenericEntity<List<Activity>>(am.findAll()){})
 				.header("Access-Control-Allow-Origin", "*")
@@ -33,7 +33,7 @@ public class ActivityRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createActivity(Activity a) {
+	public Response createActivity(Activity a) throws Exception {
 		ActivityModel am = new ActivityModel();
 		am.save(a);
 		
@@ -47,7 +47,7 @@ public class ActivityRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{activity_id}")
-	public Response getActivityById(@PathParam("activity_id") Short activity_id) {
+	public Response getActivityById(@PathParam("activity_id") Short activity_id) throws Exception {
 		ActivityModel am = new ActivityModel();
 		Activity a = am.get(activity_id);
 		if(a == null)
@@ -62,7 +62,7 @@ public class ActivityRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{activity_id}/events")
-	public Response getEventsActivityById(@PathParam("activity_id") Short activity_id) {
+	public Response getEventsActivityById(@PathParam("activity_id") Short activity_id) throws IllegalArgumentException, Exception {
 		ActivityModel am = new ActivityModel();
 		return Response.ok().entity(new GenericEntity<Set<Event>>(am.getEvents(activity_id)){})
 				.header("Access-Control-Allow-Origin", "*")

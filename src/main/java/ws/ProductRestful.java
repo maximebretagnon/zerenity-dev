@@ -21,7 +21,7 @@ import model.*;
 public class ProductRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findAll(){
+	public Response findAll() throws IllegalArgumentException, Exception{
 		ProductModel pm = new ProductModel();
 		return Response.ok().entity(new GenericEntity<List<Product>>(pm.findAll()){})
 				.header("Access-Control-Allow-Headers", "Content-Type")
@@ -34,7 +34,7 @@ public class ProductRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createProduct(Product p) {
+	public Response createProduct(Product p) throws Exception {
 		ProductModel pm = new ProductModel();
 		pm.save(p);
 		
@@ -48,7 +48,7 @@ public class ProductRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{product_id}")
-	public Response getProductById(@PathParam("product_id") Short product_id) {
+	public Response getProductById(@PathParam("product_id") Short product_id) throws Exception {
 		ProductModel pm = new ProductModel();
 		Product p = pm.get(product_id);
 		if(p == null)
@@ -64,7 +64,7 @@ public class ProductRestful {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{product_id}")
-	public Response editProduct(Product p){
+	public Response editProduct(Product p) throws Exception{
 		ProductModel pm = new ProductModel();
 		pm.update(p);
 		
@@ -78,7 +78,7 @@ public class ProductRestful {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{product_id}")
-	public Response deleteProduct(@PathParam("product_id") Short product_id) {
+	public Response deleteProduct(@PathParam("product_id") Short product_id) throws Exception {
 		ProductModel pm = new ProductModel();
 		pm.delete(pm.get(product_id));
 		return Response.ok()
@@ -91,7 +91,7 @@ public class ProductRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/categories")
-	public Response findAllCategories() {
+	public Response findAllCategories() throws IllegalArgumentException, Exception {
 		ProductCategoryModel pcm = new ProductCategoryModel();
 		return Response.ok().entity(new GenericEntity<List<ProductCategory>>(pcm.findAll()){})
 				.header("Access-Control-Allow-Origin", "*")
@@ -103,7 +103,7 @@ public class ProductRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/categories/{category_id}")
-	public Response getCategoryById(@PathParam("category_id") Short category_id) {
+	public Response getCategoryById(@PathParam("category_id") Short category_id) throws Exception {
 		ProductCategoryModel pcm = new ProductCategoryModel();
 		ProductCategory pc = pcm.get(category_id);
 		if(pc == null)

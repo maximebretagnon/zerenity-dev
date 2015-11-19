@@ -17,63 +17,95 @@ public class EventModel extends AbstractModel<Event, Short> {
 		super(Event.class);
 	}
 	
-	public Set<Excludeddate> getExcludedDates(Short id) {
+	public Set<Excludeddate> getExcludedDates(Short id) throws Exception {
         Event e = this.get(id);
 		if(e == null)
 			return null;
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        Set<Excludeddate> dates = new HashSet<Excludeddate>();
-        dates = e.getExcludeddates();
+		Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Set<Excludeddate> dates = new HashSet<Excludeddate>();
+				dates = e.getExcludeddates();
 
-        tx.commit();
-        HibernateUtil.closeSession();
-        return dates;
+				tx.commit();
+				return dates;
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
+    	
+        
+        
+
     }
 	
-    public void addExcludedDate(Short id, Excludeddate ex) {
+    public void addExcludedDate(Short id, Excludeddate exd) throws Exception {
         Event e = this.get(id);
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
+        Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Excludeddate exDate = exd;
+				exDate.setEvent(e);
         
-        Excludeddate exDate = ex;
-        exDate.setEvent(e);
-        
-        session.save(exDate);
-        tx.commit();
-        HibernateUtil.closeSession();
+				session.save(exDate);
+        		tx.commit();
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
     }
     
-	public Set<Inscription> getRegistration(Short id) {
+	public Set<Inscription> getRegistration(Short id) throws Exception {
         Event e = this.get(id);
 		if(e == null)
 			return null;
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        Set<Inscription> dates = new HashSet<Inscription>();
-        dates = e.getInscriptions();
+		Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Set<Inscription> dates = new HashSet<Inscription>();
+				dates = e.getInscriptions();
 
-        tx.commit();
-        HibernateUtil.closeSession();
-        return dates;
+				tx.commit();
+				return dates;
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
     }
 	
-    public void addRegistration(Short id, Inscription i) {
+    public void addRegistration(Short id, Inscription i) throws Exception {
         Event e = this.get(id);
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        Inscription inscription = i;
-        inscription.setEvent(e);
-        
-        session.save(inscription);
-        tx.commit();
-        HibernateUtil.closeSession();
+        Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Inscription inscription = i;
+				inscription.setEvent(e);
+	        
+				session.save(inscription);
+				tx.commit();	
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
     }
 }

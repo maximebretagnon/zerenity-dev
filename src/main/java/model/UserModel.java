@@ -15,110 +15,159 @@ public class UserModel extends AbstractModel<User, Short> {
 		super(User.class);
 	}
 	
-    public User getByMail(String mail) {
+    public User getByMail(String mail) throws Exception {
     	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        User user = (User)
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				User user = (User)
         	    session.createQuery("select us from User us where us.userMail = :mail")
                 .setString("mail", mail)
                 .uniqueResult();
 
-        tx.commit();
-        HibernateUtil.closeSession();
-        return user;
+				tx.commit();
+        		return user;
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
     }
     
-    public Set<Userorder> getOrders(Short id) {
+    public Set<Userorder> getOrders(Short id) throws Exception {
         User u = this.get(id);
 		if(u == null)
 			return null;
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        Set<Userorder> orders = new HashSet<Userorder>();
-        orders = u.getUserorders();
+		Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Set<Userorder> orders = new HashSet<Userorder>();
+				orders = u.getUserorders();
 
-        tx.commit();
-        HibernateUtil.closeSession();
-        return orders;
+				tx.commit();
+				return orders;
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
     }
         
-    public Set<Inscription> getInscriptions(Short id) {
+    public Set<Inscription> getInscriptions(Short id) throws Exception {
         User u = this.get(id);
 		if(u == null)
 			return null;
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        Set<Inscription> inscriptions = new HashSet<Inscription>();
-        inscriptions = u.getInscriptions();
-
-        tx.commit();
-        HibernateUtil.closeSession();
-        return inscriptions;
+		Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Set<Inscription> inscriptions = new HashSet<Inscription>();
+		        inscriptions = u.getInscriptions();
+		
+		        tx.commit();
+		        return inscriptions;
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
     }
     
-    public Set<Cotisation> getCotisations(Short id) {
+    public Set<Cotisation> getCotisations(Short id) throws Exception {
         User u = this.get(id);
 		if(u == null)
 			return null;
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        Set<Cotisation> cotisations = new HashSet<Cotisation>();
-        cotisations = u.getCotisations();
+		Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Set<Cotisation> cotisations = new HashSet<Cotisation>();
+				cotisations = u.getCotisations();
 
-        tx.commit();
-        HibernateUtil.closeSession();
-        return cotisations;
+				tx.commit(); 
+        		return cotisations;
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
     }
     
-    public void createSubscription(Short id, Cotisation c) {
+    public void createSubscription(Short id, Cotisation c) throws Exception {
         User u = this.get(id);
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
+        Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Cotisation cotisation = c;
+				cotisation.setUser(u);
         
-        Cotisation cotisation = c;
-        cotisation.setUser(u);
-        
-        session.save(cotisation);
-        tx.commit();
-        HibernateUtil.closeSession();
+        		session.save(cotisation); 
+        		tx.commit();
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
     }
     
-    public Set<Notification> getNotifications(Short id) {
+    public Set<Notification> getNotifications(Short id) throws Exception {
         User u = this.get(id);
 		if(u == null)
 			return null;
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        Set<Notification> notifications = new HashSet<Notification>();
-        notifications = u.getNotifications();
+		Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Set<Notification> notifications = new HashSet<Notification>();
+				notifications = u.getNotifications();
 
-        tx.commit();
-        HibernateUtil.closeSession();
-        return notifications;
+        		tx.commit(); 
+        		return notifications;
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}   
     }
     
-    public void createNotification(Short id, Notification n) {
+    public void createNotification(Short id, Notification n) throws Exception {
         User u = this.get(id);
 		
-    	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
+        Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Notification notif = n;
+				notif.setUser(u);
         
-        Notification notif = n;
-        notif.setUser(u);
-        
-        session.save(notif);
-        tx.commit();
-        HibernateUtil.closeSession();
+				session.save(notif);
+				tx.commit();
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
     }
 	
 }

@@ -25,7 +25,7 @@ public class AuthService{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login")
-	public Response login(Credentials cred) {
+	public Response login(Credentials cred) throws Exception {
 		UserModel um = new UserModel();
 		User user = um.getByMail(cred.getUsername());
 		if (user != null && user.getUserPwd().equals(Utils.toSHA512(cred.getPassword()))){

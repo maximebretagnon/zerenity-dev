@@ -16,19 +16,26 @@ public class ActivityModel extends AbstractModel<Activity, Short> {
 		super(Activity.class);
 	}
 	
-    public Set<Event> getEvents(Short id) {
+    public Set<Event> getEvents(Short id) throws Exception {
         Activity a = this.get(id);
 		if(a == null)
 			return null;
 		
     	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        Set<Event> events = new HashSet<Event>();
-        events = a.getEvents();
-
-        tx.commit();
-        HibernateUtil.closeSession();
-        return events;
+    	try {
+	        Transaction tx = session.beginTransaction();
+	        try{
+		        Set<Event> events = new HashSet<Event>();
+		        events = a.getEvents();
+		
+		        tx.commit();
+		        return events;
+	        }catch(Exception ex){
+	        	tx.rollback();
+	        	throw(ex);
+	        }
+    	}finally{
+    		HibernateUtil.closeSession();
+    	}
     }
 }

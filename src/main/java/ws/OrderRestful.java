@@ -20,7 +20,7 @@ public class OrderRestful {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findAll(){
+	public Response findAll() throws IllegalArgumentException, Exception{
 		OrderModel om = new OrderModel();
 		return Response.ok().entity(new GenericEntity<List<Userorder>>(om.findAll()){})
 				.header("Access-Control-Allow-Origin", "*")
@@ -32,7 +32,7 @@ public class OrderRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrder(Userorder o) {
+	public Response createOrder(Userorder o) throws Exception {
 		OrderModel om = new OrderModel();
 		om.save(o);
 		
@@ -46,7 +46,7 @@ public class OrderRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{order_id}")
-	public Response getOrderById(@PathParam("order_id") Short order_id) {
+	public Response getOrderById(@PathParam("order_id") Short order_id) throws Exception {
 		OrderModel om = new OrderModel();
 		Userorder o = om.get(order_id);
 		if(o == null)

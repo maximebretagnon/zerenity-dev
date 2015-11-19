@@ -20,73 +20,110 @@ public class AbstractModel<T, PK> {
         this.cl=cl;
     }
     
-    public List<T> query(String hsql, Map<String, Object> params) {
-
-        Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-
-        Query query = session.createQuery(hsql);
-        if (params != null) {
-            for (String i : params.keySet()) {
-                query.setParameter(i, params.get(i));
-            }
+    public List<T> query(String hsql, Map<String, Object> params) throws Exception {
+    	Session session = HibernateUtil.currentSession();
+    	try {
+	        Transaction tx = session.beginTransaction();
+	        try{
+		        Query query = session.createQuery(hsql);
+		        if (params != null) {
+		            for (String i : params.keySet()) {
+		                query.setParameter(i, params.get(i));
+		            }
+		        }
+		
+		        List<T> result = null;
+		        if ((hsql.toUpperCase().indexOf("DELETE") == -1)
+		                && (hsql.toUpperCase().indexOf("UPDATE") == -1)
+		                && (hsql.toUpperCase().indexOf("INSERT") == -1)) {
+		            result = query.list();
+		        } else {
+		            query.executeUpdate();
+		        }
+		        tx.commit();
+		        return result;
+	        } catch(Exception ex) {
+	        	tx.rollback();
+	        	throw ex;
+	        } 
+    	}finally {
+        	HibernateUtil.closeSession();
         }
-
-        List<T> result = null;
-        if ((hsql.toUpperCase().indexOf("DELETE") == -1)
-                && (hsql.toUpperCase().indexOf("UPDATE") == -1)
-                && (hsql.toUpperCase().indexOf("INSERT") == -1)) {
-            result = query.list();
-        } else {
-            query.executeUpdate();
-        }
-        tx.commit();
-        HibernateUtil.closeSession();
-        return result;
     }
     
-    public List<T> findAll() {
+    public List<T> findAll() throws Exception {
         return query("from "+cl.getName(), null);
     }
     
-    public T get(PK id) {
+    public T get(PK id) throws Exception {
     	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        
-        T element = (T) session.get(cl, (Serializable) id);
-
-        tx.commit();
-        HibernateUtil.closeSession();
-        return element;
+    	try{
+	        Transaction tx = session.beginTransaction();
+	        try {
+		        T element = (T) session.get(cl, (Serializable) id);
+		
+		        tx.commit();
+		        return element;
+	        }catch (Exception ex){
+	        	tx.rollback();
+	        	throw ex;
+	        }
+    	}finally {
+    		HibernateUtil.closeSession();
+    	}
     }
     
-    public void update(T elt) {
+    public void update(T elt) throws Exception {
     	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        session.update(elt);
-        tx.commit();
-        HibernateUtil.closeSession();
+    	try {
+	        Transaction tx = session.beginTransaction();
+	        try {
+		        session.update(elt);
+		        tx.commit();       
+	        }catch(Exception ex){
+	        	tx.rollback();
+	        	throw(ex);
+	        }
+    	}finally{
+    		HibernateUtil.closeSession();
+    	}
     }
 
-    public void delete(T elt) {
+    public void delete(T elt) throws Exception {
     	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        session.delete(elt);
-        tx.commit();
-        HibernateUtil.closeSession();
+    	try {
+	        Transaction tx = session.beginTransaction();
+	        try {
+	        	session.delete(elt);
+		        tx.commit();       
+	        }catch(Exception ex){
+	        	tx.rollback();
+	        	throw(ex);
+	        }
+    	}finally{
+    		HibernateUtil.closeSession();
+    	}
     }
     
-    public void deleteAll() {
+    public void deleteAll() throws Exception {
         query("delete from "+cl.getName(),null);
 
     }
     
-    public PK save(T elt) {
+    public PK save(T elt) throws Exception {
     	Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        PK result=(PK)session.save(elt);
-        tx.commit();
-        HibernateUtil.closeSession();
-        return result;
+    	try {
+	        Transaction tx = session.beginTransaction();
+	        try {
+	        	PK result=(PK)session.save(elt);
+		        tx.commit();  
+		        return result;
+	        }catch(Exception ex){
+	        	tx.rollback();
+	        	throw(ex);
+	        }
+    	}finally{
+    		HibernateUtil.closeSession();
+    	}
     }
 }

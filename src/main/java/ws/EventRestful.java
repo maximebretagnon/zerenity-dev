@@ -29,7 +29,7 @@ public class EventRestful {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findAll(){
+	public Response findAll() throws IllegalArgumentException, Exception{
 		EventModel em = new EventModel();
 		return Response.ok().entity(new GenericEntity<List<Event>>(em.findAll()){})
 				.header("Access-Control-Allow-Origin", "*")
@@ -41,7 +41,7 @@ public class EventRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createEvent(Event e) {
+	public Response createEvent(Event e) throws Exception {
 		EventModel em = new EventModel();
 		em.save(e);
 		
@@ -55,7 +55,7 @@ public class EventRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{event_id}")
-	public Response getActivityById(@PathParam("event_id") Short event_id) {
+	public Response getActivityById(@PathParam("event_id") Short event_id) throws Exception {
 		EventModel em = new EventModel();
 		Event e = em.get(event_id);
 		if(e == null)
@@ -70,7 +70,7 @@ public class EventRestful {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editEvent(Event e){
+	public Response editEvent(Event e) throws Exception{
 		EventModel em = new EventModel();
 		em.update(e);
 		
@@ -84,7 +84,7 @@ public class EventRestful {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{event_id}")
-	public Response deleteEvent(@PathParam("event_id") Short event_id) {
+	public Response deleteEvent(@PathParam("event_id") Short event_id) throws Exception {
 		EventModel em = new EventModel();
 		em.delete(em.get(event_id));
 		return Response.ok()
@@ -97,7 +97,7 @@ public class EventRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/repetition")
-	public Response getRepetition() {
+	public Response getRepetition() throws IllegalArgumentException, Exception {
 		RepetitionModel rm = new RepetitionModel();
 		return Response.ok().entity(new GenericEntity<List<Repetition>>(rm.findAll()){})
 				.header("Access-Control-Allow-Origin", "*")
@@ -109,7 +109,7 @@ public class EventRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{event_id}/excluded_dates")
-	public Response getExcludedDates(@PathParam("event_id") Short event_id) {
+	public Response getExcludedDates(@PathParam("event_id") Short event_id) throws IllegalArgumentException, Exception {
 		EventModel em = new EventModel();
 		return Response.ok().entity(new GenericEntity<Set<Excludeddate>>(em.getExcludedDates(event_id)){})
 				.header("Access-Control-Allow-Origin", "*")
@@ -122,7 +122,7 @@ public class EventRestful {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{event_id}/excluded_dates")
-	public Response addExcludedDate(@PathParam("event_id") Short event_id, Excludeddate ex) {
+	public Response addExcludedDate(@PathParam("event_id") Short event_id, Excludeddate ex) throws Exception {
 		EventModel em = new EventModel();
 		em.addExcludedDate(event_id, ex);
 		
@@ -136,7 +136,7 @@ public class EventRestful {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{event_id}/register")
-	public Response getRegistration(@PathParam("event_id") Short event_id) {
+	public Response getRegistration(@PathParam("event_id") Short event_id) throws IllegalArgumentException, Exception {
 		EventModel em = new EventModel();
 		return Response.ok().entity(new GenericEntity<Set<Inscription>>(em.getRegistration(event_id)){})
 				.header("Access-Control-Allow-Origin", "*")
@@ -149,7 +149,7 @@ public class EventRestful {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{event_id}/register")
-	public Response addRegistration(@PathParam("event_id") Short event_id, Inscription i) {
+	public Response addRegistration(@PathParam("event_id") Short event_id, Inscription i) throws Exception {
 		EventModel em = new EventModel();
 		em.addRegistration(event_id, i);
 		
@@ -172,7 +172,7 @@ public class EventRestful {
 		 }
 	 * 
 	 */
-	public Response deleteRegistration(@PathParam("event_id") Short event_id, InscriptionId id ) {
+	public Response deleteRegistration(@PathParam("event_id") Short event_id, InscriptionId id ) throws Exception {
 		InscriptionModel im = new InscriptionModel();
 		im.delete(im.get(id));
 		return Response.ok()
