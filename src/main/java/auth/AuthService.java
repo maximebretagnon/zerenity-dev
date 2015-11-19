@@ -45,7 +45,6 @@ public class AuthService{
 			return Response.status(401)
 					.header("Access-Control-Allow-Origin", "*")
 					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-					.allow("OPTIONS")
 					.build();
 		}
 	}
@@ -56,7 +55,6 @@ public class AuthService{
 	    return Response.ok()
 				.header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.allow("OPTIONS")
 				.build();
 	}
 
