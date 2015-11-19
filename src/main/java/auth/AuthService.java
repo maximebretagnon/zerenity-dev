@@ -36,12 +36,14 @@ public class AuthService{
 			return Response.status(200).entity(res)
 					.header("Access-Control-Allow-Origin", "*")
 					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
+					.allow("OPTIONS")
 					.build();
 		}
 		else{
 			return Response.status(401)
 					.header("Access-Control-Allow-Origin", "*")
 					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTION, HEAD")
+					.allow("OPTIONS")
 					.build();
 		}
 	}
