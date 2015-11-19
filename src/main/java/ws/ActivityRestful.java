@@ -17,13 +17,16 @@ import model.ActivityModel;
 import domain.*;
 
 @Path("activities")
-public class ActivityRestful extends AbstractRestful{
+public class ActivityRestful {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findAll() throws IllegalArgumentException, Exception{
 		ActivityModel am = new ActivityModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<List<Activity>>(am.findAll()){}))
+		return Response.ok().entity(new GenericEntity<List<Activity>>(am.findAll()){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -34,7 +37,11 @@ public class ActivityRestful extends AbstractRestful{
 		ActivityModel am = new ActivityModel();
 		am.save(a);
 		
-		return addHeaders(Response.ok()).build();
+		return Response.ok()
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@GET
@@ -45,7 +52,11 @@ public class ActivityRestful extends AbstractRestful{
 		Activity a = am.get(activity_id);
 		if(a == null)
 			return null;
-		return addHeaders(Response.ok().entity(new GenericEntity<Activity>(a){})).build();
+		return Response.ok().entity(new GenericEntity<Activity>(a){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@GET
@@ -53,6 +64,10 @@ public class ActivityRestful extends AbstractRestful{
 	@Path("/{activity_id}/events")
 	public Response getEventsActivityById(@PathParam("activity_id") Short activity_id) throws IllegalArgumentException, Exception {
 		ActivityModel am = new ActivityModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<Set<Event>>(am.getEvents(activity_id)){})).build();
+		return Response.ok().entity(new GenericEntity<Set<Event>>(am.getEvents(activity_id)){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 }

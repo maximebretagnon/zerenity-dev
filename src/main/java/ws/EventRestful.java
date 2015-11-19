@@ -25,13 +25,17 @@ import domain.InscriptionId;
 import domain.Repetition;
 
 @Path("events")
-public class EventRestful extends AbstractRestful{
+public class EventRestful {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findAll() throws IllegalArgumentException, Exception{
 		EventModel em = new EventModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<List<Event>>(em.findAll()){})).build();
+		return Response.ok().entity(new GenericEntity<List<Event>>(em.findAll()){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@POST
@@ -41,7 +45,11 @@ public class EventRestful extends AbstractRestful{
 		EventModel em = new EventModel();
 		em.save(e);
 		
-		return addHeaders(Response.ok()).build();
+		return Response.ok()
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@GET
@@ -52,7 +60,11 @@ public class EventRestful extends AbstractRestful{
 		Event e = em.get(event_id);
 		if(e == null)
 			return null;
-		return addHeaders(Response.ok().entity(new GenericEntity<Event>(e){})).build();
+		return Response.ok().entity(new GenericEntity<Event>(e){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@PUT
@@ -62,7 +74,11 @@ public class EventRestful extends AbstractRestful{
 		EventModel em = new EventModel();
 		em.update(e);
 		
-		return addHeaders(Response.ok()).build();
+		return Response.ok()
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@DELETE
@@ -71,7 +87,11 @@ public class EventRestful extends AbstractRestful{
 	public Response deleteEvent(@PathParam("event_id") Short event_id) throws Exception {
 		EventModel em = new EventModel();
 		em.delete(em.get(event_id));
-		return addHeaders(Response.ok()).build();
+		return Response.ok()
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@GET
@@ -79,7 +99,11 @@ public class EventRestful extends AbstractRestful{
 	@Path("/repetition")
 	public Response getRepetition() throws IllegalArgumentException, Exception {
 		RepetitionModel rm = new RepetitionModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<List<Repetition>>(rm.findAll()){})).build();
+		return Response.ok().entity(new GenericEntity<List<Repetition>>(rm.findAll()){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@GET
@@ -87,7 +111,11 @@ public class EventRestful extends AbstractRestful{
 	@Path("/{event_id}/excluded_dates")
 	public Response getExcludedDates(@PathParam("event_id") Short event_id) throws IllegalArgumentException, Exception {
 		EventModel em = new EventModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<Set<Excludeddate>>(em.getExcludedDates(event_id)){})).build();
+		return Response.ok().entity(new GenericEntity<Set<Excludeddate>>(em.getExcludedDates(event_id)){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 
 	@POST
@@ -98,7 +126,11 @@ public class EventRestful extends AbstractRestful{
 		EventModel em = new EventModel();
 		em.addExcludedDate(event_id, ex);
 		
-		return addHeaders(Response.ok()).build();
+		return Response.ok()
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@GET
@@ -106,7 +138,11 @@ public class EventRestful extends AbstractRestful{
 	@Path("/{event_id}/register")
 	public Response getRegistration(@PathParam("event_id") Short event_id) throws IllegalArgumentException, Exception {
 		EventModel em = new EventModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<Set<Inscription>>(em.getRegistration(event_id)){})).build();
+		return Response.ok().entity(new GenericEntity<Set<Inscription>>(em.getRegistration(event_id)){})
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	@POST
@@ -117,7 +153,11 @@ public class EventRestful extends AbstractRestful{
 		EventModel em = new EventModel();
 		em.addRegistration(event_id, i);
 		
-		return addHeaders(Response.ok()).build();
+		return Response.ok()
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 
 	@DELETE
@@ -135,7 +175,11 @@ public class EventRestful extends AbstractRestful{
 	public Response deleteRegistration(@PathParam("event_id") Short event_id, InscriptionId id ) throws Exception {
 		InscriptionModel im = new InscriptionModel();
 		im.delete(im.get(id));
-		return addHeaders(Response.ok()).build();
+		return Response.ok()
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 	
 	

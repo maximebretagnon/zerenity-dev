@@ -14,12 +14,11 @@ import auth.Credentials;
 import domain.User;
 import model.UserModel;
 import utils.Utils;
-import ws.AbstractRestful;
 
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class AuthService extends AbstractRestful{
+public class AuthService{
 
  
 	@POST
@@ -35,11 +34,29 @@ public class AuthService extends AbstractRestful{
             user.setUserToken(hashed);
             AuthResponse res = new AuthResponse(user.getUserId(), user.getUserMail(), token, user.isIsAdmin(), user.isIsParticipant(), user.isIsMember(), user.isIsManager());
             um.update(user);
-			return addHeaders(Response.status(200).entity(res)).build();
+			return Response.status(200).entity(res)
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+					.build();
 		}
 		else{
-			return addHeaders(Response.status(401)).build();
+			return Response.status(401)
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+					.build();
 		}
+	}
+	
+	@OPTIONS
+	@Path("/login")
+	public Response myResource() {
+	    return Response.ok()
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
 	}
 
 }
