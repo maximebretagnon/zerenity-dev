@@ -1,7 +1,5 @@
 package auth;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
