@@ -35,10 +35,10 @@ public class AuthService extends AbstractRestful{
             user.setUserToken(hashed);
             AuthResponse res = new AuthResponse(user.getUserId(), user.getUserMail(), token, user.isIsAdmin(), user.isIsParticipant(), user.isIsMember(), user.isIsManager());
             um.update(user);
-			return addHeaders(Response.status(200).entity(res)).build();
+			return addHeaders(Response.status(200).entity(res));
 		}
 		else{
-			return addHeaders(Response.status(401)).build();
+			return addHeaders(Response.status(401));
 		}
 	}
 

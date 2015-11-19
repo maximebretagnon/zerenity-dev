@@ -31,7 +31,7 @@ public class EventRestful extends AbstractRestful{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findAll() throws IllegalArgumentException, Exception{
 		EventModel em = new EventModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<List<Event>>(em.findAll()){})).build();
+		return addHeaders(Response.ok().entity(new GenericEntity<List<Event>>(em.findAll()){}));
 	}
 	
 	@POST
@@ -41,7 +41,7 @@ public class EventRestful extends AbstractRestful{
 		EventModel em = new EventModel();
 		em.save(e);
 		
-		return addHeaders(Response.ok()).build();
+		return addHeaders(Response.ok());
 	}
 	
 	@GET
@@ -52,7 +52,7 @@ public class EventRestful extends AbstractRestful{
 		Event e = em.get(event_id);
 		if(e == null)
 			return null;
-		return addHeaders(Response.ok().entity(new GenericEntity<Event>(e){})).build();
+		return addHeaders(Response.ok().entity(new GenericEntity<Event>(e){}));
 	}
 	
 	@PUT
@@ -62,7 +62,7 @@ public class EventRestful extends AbstractRestful{
 		EventModel em = new EventModel();
 		em.update(e);
 		
-		return addHeaders(Response.ok()).build();
+		return addHeaders(Response.ok());
 	}
 	
 	@DELETE
@@ -71,7 +71,7 @@ public class EventRestful extends AbstractRestful{
 	public Response deleteEvent(@PathParam("event_id") Short event_id) throws Exception {
 		EventModel em = new EventModel();
 		em.delete(em.get(event_id));
-		return addHeaders(Response.ok()).build();
+		return addHeaders(Response.ok());
 	}
 	
 	@GET
@@ -79,7 +79,7 @@ public class EventRestful extends AbstractRestful{
 	@Path("/repetition")
 	public Response getRepetition() throws IllegalArgumentException, Exception {
 		RepetitionModel rm = new RepetitionModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<List<Repetition>>(rm.findAll()){})).build();
+		return addHeaders(Response.ok().entity(new GenericEntity<List<Repetition>>(rm.findAll()){}));
 	}
 	
 	@GET
@@ -87,7 +87,7 @@ public class EventRestful extends AbstractRestful{
 	@Path("/{event_id}/excluded_dates")
 	public Response getExcludedDates(@PathParam("event_id") Short event_id) throws IllegalArgumentException, Exception {
 		EventModel em = new EventModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<Set<Excludeddate>>(em.getExcludedDates(event_id)){})).build();
+		return addHeaders(Response.ok().entity(new GenericEntity<Set<Excludeddate>>(em.getExcludedDates(event_id)){}));
 	}
 
 	@POST
@@ -98,7 +98,7 @@ public class EventRestful extends AbstractRestful{
 		EventModel em = new EventModel();
 		em.addExcludedDate(event_id, ex);
 		
-		return addHeaders(Response.ok()).build();
+		return addHeaders(Response.ok());
 	}
 	
 	@GET
@@ -106,7 +106,7 @@ public class EventRestful extends AbstractRestful{
 	@Path("/{event_id}/register")
 	public Response getRegistration(@PathParam("event_id") Short event_id) throws IllegalArgumentException, Exception {
 		EventModel em = new EventModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<Set<Inscription>>(em.getRegistration(event_id)){})).build();
+		return addHeaders(Response.ok().entity(new GenericEntity<Set<Inscription>>(em.getRegistration(event_id)){}));
 	}
 	
 	@POST
@@ -117,7 +117,7 @@ public class EventRestful extends AbstractRestful{
 		EventModel em = new EventModel();
 		em.addRegistration(event_id, i);
 		
-		return addHeaders(Response.ok()).build();
+		return addHeaders(Response.ok());
 	}
 
 	@DELETE
@@ -135,7 +135,7 @@ public class EventRestful extends AbstractRestful{
 	public Response deleteRegistration(@PathParam("event_id") Short event_id, InscriptionId id ) throws Exception {
 		InscriptionModel im = new InscriptionModel();
 		im.delete(im.get(id));
-		return addHeaders(Response.ok()).build();
+		return addHeaders(Response.ok());
 	}
 	
 	
