@@ -36,7 +36,6 @@ public class AuthService{
             um.update(user);
 			return Response.status(200).entity(res)
 					.header("Access-Control-Allow-Origin", "*")
-					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
 					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 					.build();
