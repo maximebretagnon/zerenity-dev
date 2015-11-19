@@ -38,26 +38,26 @@ public class AuthService{
 					.header("Access-Control-Allow-Origin", "*")
 					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 					.build();
 		}
 		else{
 			return Response.status(401)
 					.header("Access-Control-Allow-Origin", "*")
 					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
 					.build();
 		}
 	}
 	
-//	@OPTIONS
-//	@Path("/login")
-//	public Response myResource() {
-//	    return Response.ok()
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-//				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
-//				.build();
-//	}
+	@OPTIONS
+	@Path("/login")
+	public Response myResource() {
+	    return Response.ok()
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.build();
+	}
 
 }
