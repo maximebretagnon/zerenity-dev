@@ -6,17 +6,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 public abstract class AbstractRestful {
-	
 	@OPTIONS
 	public Response myResource() {
-	    return addHeaders(Response.ok());
+	    return addHeaders(Response.ok())
+				.build();
 	}
 	
-	public Response addHeaders(ResponseBuilder builder){
+	public ResponseBuilder addHeaders(ResponseBuilder builder){
 		return builder
 				.header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
-				.build();
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin");
 	}
 }

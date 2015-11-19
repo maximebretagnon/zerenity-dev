@@ -24,7 +24,7 @@ public class ActivityRestful extends AbstractRestful{
 	public Response findAll() throws IllegalArgumentException, Exception{
 		ActivityModel am = new ActivityModel();
 		return addHeaders(Response.ok().entity(new GenericEntity<List<Activity>>(am.findAll()){}))
-				;
+				.build();
 	}
 	
 	@POST
@@ -34,7 +34,7 @@ public class ActivityRestful extends AbstractRestful{
 		ActivityModel am = new ActivityModel();
 		am.save(a);
 		
-		return addHeaders(Response.ok());
+		return addHeaders(Response.ok()).build();
 	}
 	
 	@GET
@@ -45,7 +45,7 @@ public class ActivityRestful extends AbstractRestful{
 		Activity a = am.get(activity_id);
 		if(a == null)
 			return null;
-		return addHeaders(Response.ok().entity(new GenericEntity<Activity>(a){}));
+		return addHeaders(Response.ok().entity(new GenericEntity<Activity>(a){})).build();
 	}
 	
 	@GET
@@ -53,6 +53,6 @@ public class ActivityRestful extends AbstractRestful{
 	@Path("/{activity_id}/events")
 	public Response getEventsActivityById(@PathParam("activity_id") Short activity_id) throws IllegalArgumentException, Exception {
 		ActivityModel am = new ActivityModel();
-		return addHeaders(Response.ok().entity(new GenericEntity<Set<Event>>(am.getEvents(activity_id)){}));
+		return addHeaders(Response.ok().entity(new GenericEntity<Set<Event>>(am.getEvents(activity_id)){})).build();
 	}
 }
