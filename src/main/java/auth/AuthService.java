@@ -51,6 +51,7 @@ public class AuthService{
 	}
 	
 	@OPTIONS
+	@Path("/login")
 	public Response myResource() {
 	    return Response.ok()
 				.header("Access-Control-Allow-Origin", "*")
