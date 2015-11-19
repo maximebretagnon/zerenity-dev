@@ -10,7 +10,7 @@ import model.RoomModel;
 
 public class Test extends TestCase{
 
-	public void testRoomCreation() {
+	public void testRoomCreation() throws Exception {
 		
 		Room room = new Room ((short)0,"10m","office",(short)50, null);
 		RoomModel rm = new RoomModel();
@@ -22,7 +22,7 @@ public class Test extends TestCase{
 		assertEquals((short)50,rget.getCapacity());
 	}
 	
-	public void testDeleteInscription() {
+	public void testDeleteInscription() throws Exception {
 		
 		InscriptionId id = new InscriptionId((short)1, (short)4);
 		InscriptionModel im = new InscriptionModel();
