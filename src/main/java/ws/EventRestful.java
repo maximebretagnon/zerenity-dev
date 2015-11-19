@@ -184,7 +184,7 @@ public class EventRestful {
 	}
 	
 	@OPTIONS
-	@Path("{subResources:.*}")
+	@Path("{path:.*}")
 	public Response myResource() {
 	    return Response.ok()
 				.header("Access-Control-Allow-Origin", "*")
