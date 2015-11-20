@@ -159,6 +159,12 @@
 		<artifactId>javassist</artifactId>
 		<version>3.20.0-GA</version>
 	</dependency>
+	<dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-servlets</artifactId>
+        <version>9.2.11</version>
+        <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
   <plugins>
