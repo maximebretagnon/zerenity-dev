@@ -7,7 +7,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -181,10 +180,11 @@ public class EventRestful {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{event_id}/register")
+	//		int userId = jsonNode.get("memberid").get;
 	public Response addRegistration(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("event_id") Short event_id, Inscription i) throws Exception {
 		UserModel um = new UserModel();
 		User u = um.getByMail(authUsername);
-		if (u.isIsMember() && u.getUserToken().equals(authToken) && i.getUser().getUserMail().equals(authUsername)){
+		if (u.isIsMember() && u.getUserToken().equals(authToken) && um.get(i.getId().getMemberId()).getUserMail().equals(authUsername)){
 			EventModel em = new EventModel();
 			em.addRegistration(event_id, i);
 			
