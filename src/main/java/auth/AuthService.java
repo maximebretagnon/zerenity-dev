@@ -42,12 +42,5 @@ public class AuthService{
 					.build();
 		}
 	}
-	
-	@OPTIONS
-	@Path("/login")
-	public Response myResource() {
-	    return Response.ok()
-				.build();
-	}
 
 }
