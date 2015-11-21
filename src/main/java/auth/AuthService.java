@@ -32,7 +32,7 @@ public class AuthService{
 			String token = UUID.randomUUID().toString() + "wKcGt" + user.getUserPwd();
 	        String hashed = Utils.toSHA512(token);
             user.setUserToken(hashed);
-            AuthResponse res = new AuthResponse(user.getUserId(), user.getUserMail(), token, user.isIsAdmin(), user.isIsParticipant(), user.isIsMember(), user.isIsManager());
+            AuthResponse res = new AuthResponse(user.getUserId(), user.getUserMail(), hashed, user.isIsAdmin(), user.isIsParticipant(), user.isIsMember(), user.isIsManager());
             um.update(user);
 			return Response.status(200).entity(res)
 					.build();
