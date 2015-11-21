@@ -183,15 +183,5 @@ public class EventRestful {
 				.build();
 	}
 	
-	@OPTIONS
-	@Path("{path:.*}")
-	public Response myResource() {
-	    return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin, auth-token, auth-username")
-				.build();
-	}
-	
 	
 }

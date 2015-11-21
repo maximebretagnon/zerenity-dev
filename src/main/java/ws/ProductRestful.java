@@ -31,20 +31,6 @@ public class ProductRestful {
 				.build();
 	}
 	
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createProduct(Product p) throws Exception {
-		ProductModel pm = new ProductModel();
-		pm.save(p);
-		
-		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
-				.build();
-	}
-	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{product_id}")
@@ -112,6 +98,19 @@ public class ProductRestful {
 				.header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+				.build();
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/categories/{category_id}")
+	public Response createProduct(Product p, @PathParam("category_id") Short category_id) throws Exception {
+		ProductCategoryModel pcm = new ProductCategoryModel();
+		ProductCategory pc = pcm.get(category_id);
+		ProductModel pm = new ProductModel();
+		p.setProductCategory(pc);
+		pm.save(p);
+		return Response.ok()
 				.build();
 	}
 }
