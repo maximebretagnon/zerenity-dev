@@ -26,18 +26,16 @@ public class Notification implements java.io.Serializable {
 	private short notificationId;
 	private User user;
 	private boolean isRead;
-	private boolean isCreationDemand;
 	private String message;
 
 	public Notification() {
 	}
 
 	public Notification(short notificationId, User user, boolean isRead,
-			boolean isCreationDemand, String message) {
+			String message) {
 		this.notificationId = notificationId;
 		this.user = user;
 		this.isRead = isRead;
-		this.isCreationDemand = isCreationDemand;
 		this.message = message;
 	}
 
@@ -71,15 +69,6 @@ public class Notification implements java.io.Serializable {
 
 	public void setIsRead(boolean isRead) {
 		this.isRead = isRead;
-	}
-
-	@Column(name = "is_creation_demand", nullable = false)
-	public boolean isIsCreationDemand() {
-		return this.isCreationDemand;
-	}
-
-	public void setIsCreationDemand(boolean isCreationDemand) {
-		this.isCreationDemand = isCreationDemand;
 	}
 
 	@Column(name = "message", nullable = false, length = 255)

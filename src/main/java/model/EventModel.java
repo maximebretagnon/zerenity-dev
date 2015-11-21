@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -97,6 +98,7 @@ public class EventModel extends AbstractModel<Event, Short> {
 			try{
 				Inscription inscription = i;
 				inscription.setEvent(e);
+				inscription.setInscriptionDate(new Date());
 	        
 				session.save(inscription);
 				tx.commit();	

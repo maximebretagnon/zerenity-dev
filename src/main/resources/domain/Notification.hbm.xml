@@ -16,9 +16,6 @@
         <property name="isRead" type="boolean">
             <column name="is_read" not-null="true" />
         </property>
-        <property name="isCreationDemand" type="boolean">
-            <column name="is_creation_demand" not-null="true" />
-        </property>
         <property name="message" type="string">
             <column name="message" not-null="true" length="255" />
         </property>

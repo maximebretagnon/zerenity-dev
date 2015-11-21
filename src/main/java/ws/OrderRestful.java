@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -20,41 +21,48 @@ public class OrderRestful {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findAll() throws IllegalArgumentException, Exception{
-		OrderModel om = new OrderModel();
-		return Response.ok().entity(new GenericEntity<List<Userorder>>(om.findAll()){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
-				.build();
+	public Response findAll(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken) throws IllegalArgumentException, Exception{
+		UserModel um = new UserModel();
+		User u = um.getByMail(authUsername);
+		if (u.isIsAdmin() && u.getUserToken().equals(authToken)){
+			OrderModel om = new OrderModel();
+			return Response.ok().entity(new GenericEntity<List<Userorder>>(om.findAll()){})
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrder(Userorder o) throws Exception {
-		OrderModel om = new OrderModel();
-		om.save(o);
-		
-		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
-				.build();
+	public Response createOrder(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, Userorder o) throws Exception {
+		UserModel um = new UserModel();
+		User u = um.getByMail(authUsername);
+		if (u.isIsMember() && u.getUserToken().equals(authToken)){
+			OrderModel om = new OrderModel();
+			om.save(o);
+			
+			return Response.ok()
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{order_id}")
-	public Response getOrderById(@PathParam("order_id") Short order_id) throws Exception {
+	public Response getOrderById(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("order_id") Short order_id) throws Exception {
+		UserModel um = new UserModel();
+		User u = um.getByMail(authUsername);
 		OrderModel om = new OrderModel();
 		Userorder o = om.get(order_id);
-		if(o == null)
-			return null;
-		return Response.ok().entity(new GenericEntity<Userorder>(o){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+		if ((u.isIsAdmin() || u.isIsMember() && o.getUser().getUserMail().equals(authUsername)) && u.getUserToken().equals(authToken)){
+			return Response.ok().entity(new GenericEntity<Userorder>(o){})
 				.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 }

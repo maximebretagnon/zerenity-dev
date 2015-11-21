@@ -29,9 +29,6 @@ public class UserRestful {
 	public Response findAll() throws IllegalArgumentException, Exception{
 		UserModel um = new UserModel();
 		return Response.ok().entity(new GenericEntity<List<User>>(um.findAll()){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -44,9 +41,6 @@ public class UserRestful {
 		if(u == null)
 			return null;
 		return Response.ok().entity(new GenericEntity<User>(u){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -56,9 +50,6 @@ public class UserRestful {
 	public Response getFormules() throws IllegalArgumentException, Exception {
 		FormuleModel fm = new FormuleModel();
 		return Response.ok().entity(new GenericEntity<List<Formule>>(fm.findAll()){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -68,9 +59,6 @@ public class UserRestful {
 	public Response getOrdersUser(@PathParam("User_id") Short User_id) throws IllegalArgumentException, Exception {
 		UserModel um = new UserModel();
 		return Response.ok().entity(new GenericEntity<Set<Userorder>>(um.getOrders(User_id)){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -80,9 +68,6 @@ public class UserRestful {
 	public Response getInscriptionsUser(@PathParam("User_id") Short User_id) throws IllegalArgumentException, Exception {
 		UserModel um = new UserModel();
 		return Response.ok().entity(new GenericEntity<Set<Inscription>>(um.getInscriptions(User_id)){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -92,9 +77,6 @@ public class UserRestful {
 	public Response getSubscriptionstionsUser(@PathParam("User_id") Short User_id) throws IllegalArgumentException, Exception {
 		UserModel um = new UserModel();
 		return Response.ok().entity(new GenericEntity<Set<Cotisation>>(um.getCotisations(User_id)){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -107,9 +89,6 @@ public class UserRestful {
 		um.createSubscription(User_id, c);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -119,9 +98,6 @@ public class UserRestful {
 	public Response getCotisationUserById(@PathParam("User_id") Short User_id, @PathParam("subscription_id") Short subscription_id ) throws IllegalArgumentException, Exception {
 		CotisationModel cm = new CotisationModel();
 		return Response.ok().entity(new GenericEntity<Cotisation>(cm.get(subscription_id)){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -131,9 +107,6 @@ public class UserRestful {
 	public Response getNotificationsUser(@PathParam("User_id") Short User_id) throws IllegalArgumentException, Exception {
 		UserModel um = new UserModel();
 		return Response.ok().entity(new GenericEntity<Set<Notification>>(um.getNotifications(User_id)){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -143,9 +116,6 @@ public class UserRestful {
 	public Response getNotificationsUserById(@PathParam("User_id") Short User_id, @PathParam("notification_id") Short notification_id ) throws IllegalArgumentException, Exception {
 		NotificationModel nm = new NotificationModel();
 		return Response.ok().entity(new GenericEntity<Notification>(nm.get(notification_id)){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -156,9 +126,6 @@ public class UserRestful {
 		NotificationModel nm = new NotificationModel();
 		nm.delete(nm.get(notification_id));
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -171,9 +138,6 @@ public class UserRestful {
 		nm.update(n);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -186,9 +150,6 @@ public class UserRestful {
 		um.createNotification(User_id, n);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -203,9 +164,6 @@ public class UserRestful {
 		um.save(u);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 
@@ -216,9 +174,6 @@ public class UserRestful {
 		UserModel um = new UserModel();
 		um.delete(um.get(User_id));
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -231,9 +186,6 @@ public class UserRestful {
 		um.update(u);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 }

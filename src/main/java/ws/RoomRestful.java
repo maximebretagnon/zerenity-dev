@@ -16,9 +16,6 @@ public class RoomRestful {
 	public Response findAll() throws IllegalArgumentException, Exception{
 		RoomModel rm = new RoomModel();
 		return Response.ok().entity(new GenericEntity<List<Room>>(rm.findAll()){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -31,9 +28,6 @@ public class RoomRestful {
 		if(r == null)
 			return null;
 		return Response.ok().entity(new GenericEntity<Room>(r){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -45,9 +39,6 @@ public class RoomRestful {
 		rm.save(r);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 
@@ -58,9 +49,6 @@ public class RoomRestful {
 		RoomModel rm = new RoomModel();
 		rm.delete(rm.get(room_id));
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -72,9 +60,6 @@ public class RoomRestful {
 		rm.update(r);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 }
