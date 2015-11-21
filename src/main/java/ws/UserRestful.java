@@ -43,20 +43,29 @@ public class UserRestful {
 	@Path("/{User_id}")
 	public Response getUserById(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id) throws Exception {
 		UserModel um = new UserModel();
-		User u = um.get(User_id);
-		if(u == null)
-			return null;
-		return Response.ok().entity(new GenericEntity<User>(u){})
-				.build();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			return Response.ok().entity(new GenericEntity<User>(user){})
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/formules")
 	public Response getFormules(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken) throws IllegalArgumentException, Exception {
-		FormuleModel fm = new FormuleModel();
-		return Response.ok().entity(new GenericEntity<List<Formule>>(fm.findAll()){})
-				.build();
+		UserModel um = new UserModel();
+		User u = um.getByMail(authUsername);
+		if (u.getUserToken().equals(authToken)){
+			FormuleModel fm = new FormuleModel();
+			return Response.ok().entity(new GenericEntity<List<Formule>>(fm.findAll()){})
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@GET
@@ -64,8 +73,14 @@ public class UserRestful {
 	@Path("/{User_id}/orders")
 	public Response getOrdersUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id) throws IllegalArgumentException, Exception {
 		UserModel um = new UserModel();
-		return Response.ok().entity(new GenericEntity<Set<Userorder>>(um.getOrders(User_id)){})
-				.build();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			return Response.ok().entity(new GenericEntity<Set<Userorder>>(um.getOrders(User_id)){})
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@GET
@@ -73,8 +88,14 @@ public class UserRestful {
 	@Path("/{User_id}/events")
 	public Response getInscriptionsUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id) throws IllegalArgumentException, Exception {
 		UserModel um = new UserModel();
-		return Response.ok().entity(new GenericEntity<Set<Inscription>>(um.getInscriptions(User_id)){})
-				.build();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			return Response.ok().entity(new GenericEntity<Set<Inscription>>(um.getInscriptions(User_id)){})
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@GET
@@ -82,8 +103,14 @@ public class UserRestful {
 	@Path("/{User_id}/subscriptions")
 	public Response getSubscriptionstionsUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id) throws IllegalArgumentException, Exception {
 		UserModel um = new UserModel();
-		return Response.ok().entity(new GenericEntity<Set<Cotisation>>(um.getCotisations(User_id)){})
-				.build();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			return Response.ok().entity(new GenericEntity<Set<Cotisation>>(um.getCotisations(User_id)){})
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@POST
@@ -92,19 +119,31 @@ public class UserRestful {
 	@Path("/{User_id}/subscriptions")
 	public Response createSubcriptionUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id, Cotisation c) throws Exception {
 		UserModel um = new UserModel();
-		um.createSubscription(User_id, c);
-		
-		return Response.ok()
-				.build();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			um.createSubscription(User_id, c);
+			return Response.ok()
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{User_id}/subscriptions/{subscription_id}")
 	public Response getCotisationUserById(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id, @PathParam("subscription_id") Short subscription_id ) throws IllegalArgumentException, Exception {
-		CotisationModel cm = new CotisationModel();
-		return Response.ok().entity(new GenericEntity<Cotisation>(cm.get(subscription_id)){})
-				.build();
+		UserModel um = new UserModel();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			CotisationModel cm = new CotisationModel();
+			return Response.ok().entity(new GenericEntity<Cotisation>(cm.get(subscription_id)){})
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@GET
@@ -112,39 +151,66 @@ public class UserRestful {
 	@Path("/{User_id}/notifications")
 	public Response getNotificationsUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id) throws IllegalArgumentException, Exception {
 		UserModel um = new UserModel();
-		return Response.ok().entity(new GenericEntity<Set<Notification>>(um.getNotifications(User_id)){})
-				.build();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			return Response.ok().entity(new GenericEntity<Set<Notification>>(um.getNotifications(User_id)){})
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{User_id}/notifications/{notification_id}")
 	public Response getNotificationsUserById(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id, @PathParam("notification_id") Short notification_id ) throws IllegalArgumentException, Exception {
-		NotificationModel nm = new NotificationModel();
-		return Response.ok().entity(new GenericEntity<Notification>(nm.get(notification_id)){})
-				.build();
+		UserModel um = new UserModel();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			NotificationModel nm = new NotificationModel();
+			return Response.ok().entity(new GenericEntity<Notification>(nm.get(notification_id)){})
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{User_id}/notifications/{notification_id}")
 	public Response deleteNotificationUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id, @PathParam("notification_id") Short notification_id ) throws Exception {
-		NotificationModel nm = new NotificationModel();
-		nm.delete(nm.get(notification_id));
-		return Response.ok()
-				.build();
+		UserModel um = new UserModel();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			NotificationModel nm = new NotificationModel();
+			nm.delete(nm.get(notification_id));
+			return Response.ok()
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{User_id}/notifications/{notification_id}/read")
-	public Response editNotification(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, Notification n) throws Exception{
-		NotificationModel nm = new NotificationModel();
-		nm.update(n);
-		
-		return Response.ok()
-				.build();
+	public Response editNotification(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id, Notification n) throws Exception{
+		UserModel um = new UserModel();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			NotificationModel nm = new NotificationModel();
+			nm.update(n);
+			
+			return Response.ok()
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@POST
@@ -153,16 +219,23 @@ public class UserRestful {
 	@Path("/{User_id}/notifications")
 	public Response createNotificationUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id, Notification n) throws Exception {
 		UserModel um = new UserModel();
-		um.createNotification(User_id, n);
-		
-		return Response.ok()
-				.build();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			um.createNotification(User_id, n);
+			
+			return Response.ok()
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, User u) throws Exception {
+	public Response createUser(User u) throws Exception {
+		
 		UserModel um = new UserModel();
 		String password = u.getUserPwd();
 		String hashed = Utils.toSHA512(password);
@@ -178,20 +251,32 @@ public class UserRestful {
 	@Path("/{User_id}")
 	public Response deleteUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id) throws Exception {
 		UserModel um = new UserModel();
-		um.delete(um.get(User_id));
-		return Response.ok()
-				.build();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			um.delete(um.get(User_id));
+			return Response.ok()
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{User_id}")
-	public Response editUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, User u) throws Exception{
+	public Response editUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id, User u) throws Exception{
 		UserModel um = new UserModel();
-		um.update(u);
-		
-		return Response.ok()
-				.build();
+		User headerUser = um.getByMail(authUsername);
+		User user = um.get(User_id);
+		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
+			um.update(u);
+			
+			return Response.ok()
+					.build();
+		}else{
+			return Response.status(403).build();
+		}
 	}
 }
