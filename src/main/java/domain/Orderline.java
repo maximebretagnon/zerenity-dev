@@ -30,6 +30,11 @@ public class Orderline implements java.io.Serializable {
 	public Orderline() {
 	}
 
+	public Orderline(Product product, short quantity) {
+		this.product = product;
+		this.quantity = quantity;
+	}
+	
 	public Orderline(OrderlineId id, Product product, Userorder userorder,
 			short quantity) {
 		this.id = id;
