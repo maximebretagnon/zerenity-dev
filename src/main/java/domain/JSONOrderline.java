@@ -5,15 +5,15 @@ package domain;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement	(name ="orderlines")
-public class SimpleOrderline implements java.io.Serializable {
+public class JSONOrderline implements java.io.Serializable {
 
 	private short productId;
 	private short quantity;
 
-	public SimpleOrderline() {
+	public JSONOrderline() {
 	}
 
-	public SimpleOrderline(short productId, short quantity) {
+	public JSONOrderline(short productId, short quantity) {
 		this.setProductId(productId);
 		this.setQuantity(quantity);
 	}

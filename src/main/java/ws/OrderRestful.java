@@ -39,7 +39,7 @@ public class OrderRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrder(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, Set<SimpleOrderline> orderlines) throws Exception {
+	public Response createOrder(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, Set<JSONOrderline> orderlines) throws Exception {
 		UserModel um = new UserModel();
 		User u = um.getByMail(authUsername);
 		if (u.isIsMember() && u.getUserToken().equals(authToken)){

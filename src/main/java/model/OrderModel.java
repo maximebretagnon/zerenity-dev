@@ -14,7 +14,7 @@ import persistence.HibernateUtil;
 import domain.Excludeddate;
 import domain.Orderline;
 import domain.OrderlineId;
-import domain.SimpleOrderline;
+import domain.JSONOrderline;
 import domain.User;
 import domain.Userorder;
 
@@ -24,7 +24,7 @@ public class OrderModel extends AbstractModel<Userorder, Short> {
 		super(Userorder.class);
 	}
 	
-	public void createOrder(User u, Set<SimpleOrderline> orderlines) throws Exception{
+	public void createOrder(User u, Set<JSONOrderline> orderlines) throws Exception{
 		
 		Session session = HibernateUtil.currentSession();
 		try{
@@ -36,9 +36,9 @@ public class OrderModel extends AbstractModel<Userorder, Short> {
 				
 				Short order_id = (Short)session.save(order);
 				
-				Iterator<SimpleOrderline> i = orderlines.iterator();
+				Iterator<JSONOrderline> i = orderlines.iterator();
 				while(i.hasNext()){
-					SimpleOrderline line = i.next();
+					JSONOrderline line = i.next();
 
 					Orderline orderline = new Orderline();
 					orderline.setId(new OrderlineId(line.getProductId(), order_id));

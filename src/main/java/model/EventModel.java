@@ -2,20 +2,57 @@ package model;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import persistence.HibernateUtil;
-import domain.Event;
-import domain.Excludeddate;
-import domain.Inscription;
+import domain.*;
 
 public class EventModel extends AbstractModel<Event, Short> {
 
 	public EventModel(){
 		super(Event.class);
+	}
+	
+	public Short save(JSONEvent e) throws Exception{
+		Event event = new Event();
+		event.setEventName(e.getEventName());
+		event.setEventPrice(e.getEventPrice());
+		event.setEventStartDate(e.getEventStartDate());
+		event.setEventEndDate(e.getEventEndDate());
+		
+		if(e.getRepetitionId() != 0){
+			RepetitionModel rm = new RepetitionModel();
+			Repetition r = rm.get(e.getRepetitionId());
+			event.setRepetition(r);
+		}
+		UserModel um = new UserModel();
+		User u = um.get(e.getUserId());
+		event.setUser(u);
+		ActivityModel am = new ActivityModel();
+		Activity a = am.get(e.getActivityId());
+		event.setActivity(a);
+		RoomModel rom = new RoomModel();
+		Room room = rom.get(e.getRoomId());
+		event.setRoom(room);
+		
+		Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				Short eventId = (Short)session.save(event);		
+        		tx.commit();
+        		return eventId;
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
 	}
 	
 	public Set<Excludeddate> getExcludedDates(Short id) throws Exception {

@@ -24,6 +24,7 @@ import domain.Event;
 import domain.Excludeddate;
 import domain.Inscription;
 import domain.InscriptionId;
+import domain.JSONEvent;
 import domain.Repetition;
 import domain.User;
 
@@ -47,7 +48,7 @@ public class EventRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createEvent(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, Event e) throws Exception {
+	public Response createEvent(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, JSONEvent e) throws Exception {
 		UserModel um = new UserModel();
 		User u = um.getByMail(authUsername);
 		if ((u.isIsAdmin() || u.isIsManager()) && u.getUserToken().equals(authToken)){
