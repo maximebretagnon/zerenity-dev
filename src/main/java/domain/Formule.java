@@ -26,7 +26,7 @@ public class Formule implements java.io.Serializable {
 
 	private short formuleId;
 	private String formuleLabel;
-	private Short formulePrice;
+	private double formulePrice;
 	private Set<Cotisation> cotisations = new HashSet<Cotisation>(0);
 
 	public Formule() {
@@ -36,7 +36,7 @@ public class Formule implements java.io.Serializable {
 		this.formuleId = formuleId;
 	}
 
-	public Formule(short formuleId, String formuleLabel,
+	public Formule(short formuleId, String formuleLabel, double formulePrice,
 			Set<Cotisation> cotisations) {
 		this.formuleId = formuleId;
 		this.formuleLabel = formuleLabel;
@@ -66,11 +66,11 @@ public class Formule implements java.io.Serializable {
 	}
 
 	@Column(name = "formule_price", nullable = false, precision = 17, scale = 17)
-	public Short getFormulePrice() {
+	public double getFormulePrice() {
 		return formulePrice;
 	}
 
-	public void setFormulePrice(Short formulePrice) {
+	public void setFormulePrice(double formulePrice) {
 		this.formulePrice = formulePrice;
 	}
 

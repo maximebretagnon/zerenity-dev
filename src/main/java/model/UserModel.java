@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -105,17 +106,22 @@ public class UserModel extends AbstractModel<User, Short> {
 		}
     }
     
-    public void createSubscription(Short id, Cotisation c) throws Exception {
-        User u = this.get(id);
+    public void createSubscription(Short user_id, Formule f) throws Exception {
+        User u = this.get(user_id);
 		
         Session session = HibernateUtil.currentSession();
 		try{
 			Transaction tx = session.beginTransaction();
 			try{
-				Cotisation cotisation = c;
+				Cotisation cotisation = new Cotisation();
 				cotisation.setUser(u);
-        
+				cotisation.setFormule(f);
+				cotisation.setOrderDate(new Date());
         		session.save(cotisation); 
+        		
+        		u.setIsMember(true);
+        		session.update(u);
+        		
         		tx.commit();
 			}catch(Exception ex){
 				tx.rollback();

@@ -18,6 +18,8 @@ import javax.ws.rs.core.Response;
 import model.CotisationModel;
 import model.FormuleModel;
 import model.NotificationModel;
+import model.ProductCategoryModel;
+import model.ProductModel;
 import model.UserModel;
 import utils.Utils;
 import domain.*;
@@ -116,13 +118,16 @@ public class UserRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{User_id}/subscriptions")
-	public Response createSubcriptionUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id, Cotisation c) throws Exception {
+	@Path("/{User_id}/formule/{formule_id}")
+	public Response createSubcriptionUser(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("User_id") Short User_id, @PathParam("formule_id") Short formule_id) throws Exception {
 		UserModel um = new UserModel();
 		User headerUser = um.getByMail(authUsername);
 		User user = um.get(User_id);
 		if ((headerUser.isIsAdmin() || headerUser.getUserMail().equals(user.getUserMail())) && headerUser.getUserToken().equals(authToken)){
-			um.createSubscription(User_id, c);
+			FormuleModel fm = new FormuleModel();
+			Formule f = fm.get(formule_id);
+
+			um.createSubscription(User_id, f);
 			return Response.ok()
 					.build();
 		}else{

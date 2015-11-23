@@ -44,7 +44,8 @@ public class OrderRestful {
 		User u = um.getByMail(authUsername);
 		if (u.isIsMember() && u.getUserToken().equals(authToken)){
 			OrderModel om = new OrderModel();
-			om.createOrder(u, orderlines);
+			if(om.createOrder(u, orderlines))
+				om.updateStock(orderlines);
 			
 			return Response.ok()
 					.build();
